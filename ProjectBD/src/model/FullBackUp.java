@@ -5,18 +5,14 @@
  */
 package model;
 
-import controller.Controller;
-
 /**
  *
- * @author jimen
+ * @author casca
  */
-public class Model {
-
-    public Model(Controller control) {
-        this.control = control;
+public class FullBackUp extends TipoEstrategia {
+    
+    public FullBackUp(String nombre) {
+        super(nombre);
     }
     
-    private Controller control;
-    private CNS conecs;
 }
