@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import model.CNS;
+import model.RowCNS;
 
 public class DataHandler {
 
@@ -25,6 +28,10 @@ public class DataHandler {
             System.err.println(e.getMessage());
             return null;
         }
+    }
+
+    public CNS getCNS() {
+        return null;
     }
     Statement stmt;
     ResultSet rset;

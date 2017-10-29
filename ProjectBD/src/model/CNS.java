@@ -55,6 +55,9 @@ public class CNS {
         }
         return true;
     }
-    
+
+    public RowCNS get(Integer i) {
+        return this.getRows().get(i);
+    }
     ArrayList<RowCNS> rows;
 }

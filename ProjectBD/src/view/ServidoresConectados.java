@@ -5,30 +5,53 @@
  */
 package view;
 
+import controller.ControllerServCon;
 import java.awt.GridLayout;
+import javax.swing.JFrame;
+import model.CNS;
+import model.ModelServCon;
+import model.RowCNS;
 
 /**
  *
  * @author casca
  */
-public class ServidoresConectados extends javax.swing.JFrame {
+public class ServidoresConectados extends JFrame {
 
     /**
      * Creates new form ServidoresConectados
+     *
+     * @param control
+     * @param modelo
      */
-    public ServidoresConectados() {
+    private ControllerServCon control;
+
+    public ServidoresConectados(ControllerServCon control) {
+        this.control = control;
         initComponents();
         initComponentsMe();
+        insertValues();
     }
-    private void initComponentsMe(){
-        GridLayout layout = new GridLayout(0,2);
+
+    private void initComponentsMe() {
+        GridLayout layout = new GridLayout(0, 4);
         this.bodyPanel.setLayout(layout);
+        this.bodyPanel.add(this.nombreCNServ);
+        this.bodyPanel.add(this.estadoCNServ);
+        this.bodyPanel.add(this.inpecCNServ);
+        this.bodyPanel.add(this.editCNServ);
     }
-    
-    private void insertValues(){
-        
+
+    private void insertValues() {
+        CNS cns = this.control.getCNS();
+        cns.getRows().stream().forEach(cn -> {
+            this.bodyPanel.add(cn.getNombre());
+            this.bodyPanel.add(cn.getEstado());
+            this.bodyPanel.add(cn.getInspeccionar());
+            this.bodyPanel.add(cn.getEditar());
+        });
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,6 +64,7 @@ public class ServidoresConectados extends javax.swing.JFrame {
 
         head = new javax.swing.JPanel();
         titleServidores = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
         body = new javax.swing.JPanel();
         palenContainTable = new javax.swing.JPanel();
         headerNames = new javax.swing.JPanel();
@@ -51,6 +75,9 @@ public class ServidoresConectados extends javax.swing.JFrame {
         bodyPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(629, 371));
+        setMinimumSize(new java.awt.Dimension(629, 371));
+        setPreferredSize(new java.awt.Dimension(629, 371));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         head.setLayout(new java.awt.GridBagLayout());
@@ -66,6 +93,8 @@ public class ServidoresConectados extends javax.swing.JFrame {
         head.add(titleServidores, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(head, gridBagConstraints);
 
@@ -75,8 +104,10 @@ public class ServidoresConectados extends javax.swing.JFrame {
 
         headerNames.setLayout(new java.awt.GridBagLayout());
 
-        nombreCNServ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nombreCNServ.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        nombreCNServ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         nombreCNServ.setText("Nombre");
+        nombreCNServ.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         nombreCNServ.setMaximumSize(new java.awt.Dimension(100, 14));
         nombreCNServ.setMinimumSize(new java.awt.Dimension(100, 14));
         nombreCNServ.setPreferredSize(new java.awt.Dimension(100, 14));
@@ -85,8 +116,10 @@ public class ServidoresConectados extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         headerNames.add(nombreCNServ, gridBagConstraints);
 
-        estadoCNServ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        estadoCNServ.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        estadoCNServ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         estadoCNServ.setText("Estado");
+        estadoCNServ.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         estadoCNServ.setMaximumSize(new java.awt.Dimension(100, 14));
         estadoCNServ.setMinimumSize(new java.awt.Dimension(100, 14));
         estadoCNServ.setPreferredSize(new java.awt.Dimension(100, 14));
@@ -95,8 +128,10 @@ public class ServidoresConectados extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         headerNames.add(estadoCNServ, gridBagConstraints);
 
-        inpecCNServ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        inpecCNServ.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        inpecCNServ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         inpecCNServ.setText("Inspeccionar");
+        inpecCNServ.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         inpecCNServ.setMaximumSize(new java.awt.Dimension(100, 14));
         inpecCNServ.setMinimumSize(new java.awt.Dimension(100, 14));
         inpecCNServ.setPreferredSize(new java.awt.Dimension(100, 14));
@@ -105,8 +140,10 @@ public class ServidoresConectados extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         headerNames.add(inpecCNServ, gridBagConstraints);
 
-        editCNServ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        editCNServ.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        editCNServ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         editCNServ.setText("Editar");
+        editCNServ.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         editCNServ.setMaximumSize(new java.awt.Dimension(100, 14));
         editCNServ.setMinimumSize(new java.awt.Dimension(100, 14));
         editCNServ.setPreferredSize(new java.awt.Dimension(100, 14));
@@ -126,25 +163,33 @@ public class ServidoresConectados extends javax.swing.JFrame {
         bodyPanel.setLayout(bodyPanelLayout);
         bodyPanelLayout.setHorizontalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 432, Short.MAX_VALUE)
         );
         bodyPanelLayout.setVerticalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 203, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         palenContainTable.add(bodyPanel, gridBagConstraints);
 
         body.add(palenContainTable, new java.awt.GridBagConstraints());
 
+        jScrollPane1.setViewportView(body);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        getContentPane().add(body, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+        gridBagConstraints.weighty = 0.1;
+        getContentPane().add(jScrollPane1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -179,7 +224,8 @@ public class ServidoresConectados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServidoresConectados().setVisible(true);
+                ControllerServCon c = new ControllerServCon(new ModelServCon());
+                new ServidoresConectados(c).setVisible(true);
             }
         });
     }
@@ -192,6 +238,7 @@ public class ServidoresConectados extends javax.swing.JFrame {
     private javax.swing.JPanel head;
     private javax.swing.JPanel headerNames;
     private javax.swing.JLabel inpecCNServ;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nombreCNServ;
     private javax.swing.JPanel palenContainTable;
     private javax.swing.JLabel titleServidores;

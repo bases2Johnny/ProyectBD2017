@@ -42,13 +42,18 @@ public class AddServers extends javax.swing.JFrame {
         btnEstrategia = new javax.swing.JButton();
         btnAceptarRegisterSer = new javax.swing.JButton();
         btnCancelarRegisterSer = new javax.swing.JButton();
+        usuario = new javax.swing.JLabel();
+        username = new javax.swing.JLabel();
+        usernameText = new javax.swing.JTextField();
+        password = new javax.swing.JLabel();
+        passwordText = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registro de servidores");
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(400, 300));
-        setMinimumSize(new java.awt.Dimension(400, 300));
-        setPreferredSize(new java.awt.Dimension(400, 300));
+        setMaximumSize(new java.awt.Dimension(350, 400));
+        setMinimumSize(new java.awt.Dimension(350, 400));
+        setPreferredSize(new java.awt.Dimension(350, 400));
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -152,7 +157,7 @@ public class AddServers extends javax.swing.JFrame {
         btnEstrategia.setText("Estrategia");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
@@ -161,7 +166,7 @@ public class AddServers extends javax.swing.JFrame {
         btnAceptarRegisterSer.setText("Aceptar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
@@ -170,11 +175,53 @@ public class AddServers extends javax.swing.JFrame {
         btnCancelarRegisterSer.setText("Cancelar");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         body.add(btnCancelarRegisterSer, gridBagConstraints);
+
+        usuario.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        usuario.setText("Usuario");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        body.add(usuario, gridBagConstraints);
+
+        username.setText("UserName");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        body.add(username, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        body.add(usernameText, gridBagConstraints);
+
+        password.setText("Password");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        body.add(password, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        body.add(passwordText, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -235,8 +282,13 @@ public class AddServers extends javax.swing.JFrame {
     private javax.swing.JTextField ipText;
     private javax.swing.JLabel nameConexion;
     private javax.swing.JTextField nameConexionText;
+    private javax.swing.JLabel password;
+    private javax.swing.JPasswordField passwordText;
     private javax.swing.JLabel port;
     private javax.swing.JTextField portText;
     private javax.swing.JLabel title;
+    private javax.swing.JLabel username;
+    private javax.swing.JTextField usernameText;
+    private javax.swing.JLabel usuario;
     // End of variables declaration                   
 }
