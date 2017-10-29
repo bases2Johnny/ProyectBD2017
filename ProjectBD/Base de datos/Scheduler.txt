@@ -1,0 +1,76 @@
+create or replace procedure create_Scheduler(name varchar2,file varchar2,frec varchar2,fecha varchar2)
+is
+begin
+	
+end;
+/
+
+/* ????????????????????????????????????????????? */
+
+/* CREDENCIALES */
+begin
+dbms_scheduler.create_credential(
+credential_name => 'ORACLE_CRED',
+username => 'oracle',
+password => 'oracle');
+end;
+/
+ 
+begin
+dbms_scheduler.set_attribute('backup','credential_name','ORACLE_CRED');
+end;
+/
+
+/* ????????????????????????????????????????????? */
+
+-------------------------------------------------------------------------------
+/* SE NECESITA CREAR UN PROGRAMA PRIMERO PARA DESPUES EJECUTAR EL JOB*/ 
+BEGIN
+DBMS_SCHEDULER.CREATE_PROGRAM (
+program_name            => 'backupProgram',
+program_type            => 'executable',
+program_action          => 'C:\oraclexe\app\oracle\Bats\run.bat',
+enabled                 => TRUE
+);
+END;
+/
+/* SE ASOCIA EL PROGRAMA AL JOB PARA LUEGO EJECUTARLO APARTIR DEL PROGRAM_ACTION*/
+begin
+dbms_scheduler.create_job (
+   job_name           =>  'backup',
+   program_name       =>  'backupProgram',
+   /*job_type           =>  'executable',
+   job_action         =>  'C:\oraclexe\app\oracle\Bats\run.bat',*/
+   /*number_of_arguments => 3,*/
+   repeat_interval    =>  'freq=daily',
+   enabled            =>  true
+   );
+ /*dbms_scheduler.set_job_argument_value('backup',1,'/q');
+
+ dbms_scheduler.set_job_argument_value('backup',2,'/c');
+
+ dbms_scheduler.set_job_argument_value('backup',3,'C:\oraclexe\app\oracle\Bats\run.bat');
+
+ dbms_scheduler.enable('backup');*/
+end;
+/
+
+/* RUN JOB */
+begin
+	exec dbms_scheduler.run_job (job_name => 'backup',use_current_session => true);
+end;
+/
+ 
+/* ELIMINAR JOB */
+Begin
+  Dbms_Scheduler.Drop_Job (Job_Name => 'backup');
+END;
+/
+
+/* ELIMINAR PROGRAM*/
+BEGIN
+DBMS_SCHEDULER.DROP_PROGRAM ('backupProgram');
+END;
+/
+
+
