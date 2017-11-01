@@ -16,6 +16,8 @@ public class Conection {
             cn = ds.getConnection(user, password);
             return cn;
         } catch (SQLException ex) {
+            
+            
             System.err.println(ex.getMessage());
             return null;
         }
