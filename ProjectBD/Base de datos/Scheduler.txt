@@ -4,7 +4,6 @@ begin
 	
 end;
 /
-
 -------------------------------------------------------------------------------
 /* SE NECESITA CREAR UN PROGRAMA PRIMERO PARA DESPUES EJECUTAR EL JOB*/ 
 
