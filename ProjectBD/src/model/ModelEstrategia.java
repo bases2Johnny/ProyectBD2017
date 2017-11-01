@@ -5,23 +5,29 @@
  */
 package model;
 
+import File.File;
 import database.Conection;
 import database.DataHandler;
+import java.util.ArrayList;
 
 /**
  *
- * @author jimen
+ * @author maiko
  */
-public class ModelServCon {
+public class ModelEstrategia {
 
-    public ModelServCon() {
+    public ModelEstrategia() {
         this.dbH = new DataHandler(new Conection());
     }
-    public CNS getCNS(){
-        return this.dbH.getCNS();
+
+    public ArrayList<String> getTablespaces() {
+        return dbH.getTablespaces();
     }
-   
-    private CNS cns;
+
+    public void write(String texto,String name,String dir) {
+        file = new File();
+        file.write(texto,name,dir);
+    }
     private DataHandler dbH;
-    private CNS conecs;
+    private File file;
 }

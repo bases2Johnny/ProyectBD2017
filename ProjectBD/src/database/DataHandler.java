@@ -30,6 +30,26 @@ public class DataHandler {
         }
     }
 
+    public ArrayList<String> getTablespaces() {
+        ArrayList<String> lista = new ArrayList();
+        try {
+            Connection conn = cn.connect();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            query = "select tablespace_name from dba_tablespaces";
+            rset = stmt.executeQuery(query);
+            while(rset.next()){
+                
+                lista.add(rset.getString("TABLESPACE_NAME"));
+            }
+            cn.disconnect();
+            return lista;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
+
     public CNS getCNS() {
         return null;
     }
