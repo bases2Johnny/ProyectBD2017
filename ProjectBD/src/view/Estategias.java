@@ -44,6 +44,7 @@ public class Estategias extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         btnTablespace = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -72,6 +73,10 @@ public class Estategias extends javax.swing.JFrame {
         panelDF = new javax.swing.JPanel();
         btnControl = new javax.swing.JCheckBox();
         btnArchive = new javax.swing.JCheckBox();
+        panelLevel = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        level1 = new javax.swing.JRadioButton();
+        level0 = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         campoName = new javax.swing.JTextField();
@@ -215,7 +220,6 @@ public class Estategias extends javax.swing.JFrame {
         jLabel8.setText("Datafile");
 
         btnControl.setText("Control");
-        btnControl.setActionCommand("Control");
         btnControl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnControlActionPerformed(evt);
@@ -249,6 +253,39 @@ public class Estategias extends javax.swing.JFrame {
                 .addGap(0, 23, Short.MAX_VALUE))
         );
 
+        jLabel9.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
+        jLabel9.setText("Level");
+
+        buttonGroup2.add(level1);
+        level1.setText("Level 1");
+
+        buttonGroup2.add(level0);
+        level0.setText("Level 0");
+
+        javax.swing.GroupLayout panelLevelLayout = new javax.swing.GroupLayout(panelLevel);
+        panelLevel.setLayout(panelLevelLayout);
+        panelLevelLayout.setHorizontalGroup(
+            panelLevelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLevelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelLevelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(level0)
+                    .addComponent(level1)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        panelLevelLayout.setVerticalGroup(
+            panelLevelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLevelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(level0)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(level1)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -261,14 +298,15 @@ public class Estategias extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(panelDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,16 +326,20 @@ public class Estategias extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30))
+                        .addComponent(panelDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(panelLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(33, 33, 33))
         );
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
@@ -331,11 +373,12 @@ public class Estategias extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(67, 67, 67)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
@@ -366,7 +409,7 @@ public class Estategias extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear)
                     .addComponent(jButton1))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -387,10 +430,13 @@ public class Estategias extends javax.swing.JFrame {
 
     private void btnTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalActionPerformed
         // TODO add your handling code here:
-            panelTable.setVisible(false);
-            panelDF.setVisible(true);
-            total=true;
-            parcial=false;
+        panelTable.setVisible(true);
+        panelDF.setVisible(true);
+        panelLevel.setVisible(false);
+        total = true;
+        parcial = false;
+        incremental = false;
+        panelTable.setVisible(false);
     }//GEN-LAST:event_btnTotalActionPerformed
 
     private void campoNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNameActionPerformed
@@ -400,25 +446,37 @@ public class Estategias extends javax.swing.JFrame {
 
     private void btnParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcialActionPerformed
 
-            panelTable.setVisible(true);
-            panelDF.setVisible(true);
-            parcial=true;
-            total=false;
+        panelTable.setVisible(true);
+        panelDF.setVisible(true);
+        panelLevel.setVisible(false);
+        parcial = true;
+        total = false;
+        incremental = false;
+
     }//GEN-LAST:event_btnParcialActionPerformed
 
     private void btnIncrementalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncrementalActionPerformed
         // TODO add your handling code here:
+        panelTable.setVisible(true);
+        panelDF.setVisible(true);
+        panelLevel.setVisible(true);
+        parcial = false;
+        total = false;
+        incremental = true;
+        panelDF.setVisible(false);
     }//GEN-LAST:event_btnIncrementalActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
         // TODO add your handling code here:
         String name = "";
         int n = seleccionados.size();
-        for (int i = 0; i < n; i++) {
-            if (i == n - 1) {
-                name = name.concat(seleccionados.get(i));
-            } else {
-                name = name.concat(seleccionados.get(i) + ",");
+        if (n > 0) {
+            for (int i = 0; i < n; i++) {
+                if (i == n - 1) {
+                    name = name.concat(seleccionados.get(i));
+                } else {
+                    name = name.concat(seleccionados.get(i) + ",");
+                }
             }
         }
 
@@ -428,17 +486,15 @@ public class Estategias extends javax.swing.JFrame {
             if (!"".equals(archive)) {
                 if (!"".equals(control)) {
                     texto = "\n" + "run \n" + "{\n" + "backup database plus archivelog;\n"
-                            +"backup current controlfile;\n"+ "}\n";
+                            + "backup current controlfile;\n" + "}\n";
                 } else {
-                    texto = "\n" + "run \n" + "{\n" + "backup database plus archivelog;\n "+ "}\n";
+                    texto = "\n" + "run \n" + "{\n" + "backup database plus archivelog;\n " + "}\n";
                 }
-            }
-            else if (!"".equals(control)) {
+            } else if (!"".equals(control)) {
                 texto = "\n" + "run \n" + "{\n" + "backup database;\n"
-                            +"backup current controlfile;\n"+ "}\n";
-            }
-            else{
-                texto = "\n" + "run \n" + "{\n" + "backup database;\n"+ "}\n";
+                        + "backup current controlfile;\n" + "}\n";
+            } else {
+                texto = "\n" + "run \n" + "{\n" + "backup database;\n" + "}\n";
             }
         } else if (parcial) {
             if (!"".equals(archive)) {
@@ -455,7 +511,15 @@ public class Estategias extends javax.swing.JFrame {
             } else {
                 texto = "\n" + "run \n" + "{\n" + "backup tablespace " + name + ";\n" + "}\n";
             }
+        } else if (incremental) {
+            if (!"".equals(name)) {
+                texto = "\n" + "run \n" + "{\n" + "backup incremental level " + level + " tablespace " + name + ";\n" + "}\n";
+            }
+            else{
+                texto = "\n" + "run \n" + "{\n" + "backup incremental level " + level + " database;\n" + "}\n";
+            }
         }
+
         controller.write(texto, campoName.getText() + ".txt", "Backups");
         String bat = "@echo off\n" + "rman target / @C:\\oraclexe\\app\\oracle\\Backups\\" + campoName.getText() + ".txt\nexit";
         controller.write(bat, campoName.getText() + ".bat", "Bats");
@@ -489,6 +553,7 @@ public class Estategias extends javax.swing.JFrame {
     public void init() {
         control = "";
         archive = "";
+        tablespaces = "";
         total = false;
         parcial = false;
         incremental = false;
@@ -512,6 +577,7 @@ public class Estategias extends javax.swing.JFrame {
         }
         panelTable.setVisible(false);
         panelDF.setVisible(false);
+        panelLevel.setVisible(false);
     }
 
     /**
@@ -557,6 +623,7 @@ public class Estategias extends javax.swing.JFrame {
     private javax.swing.ButtonGroup btnTablespace;
     private javax.swing.JRadioButton btnTotal;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JTextField campoName;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
@@ -573,12 +640,16 @@ public class Estategias extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JRadioButton level0;
+    private javax.swing.JRadioButton level1;
     private javax.swing.JPanel panelDF;
+    private javax.swing.JPanel panelLevel;
     private javax.swing.JPanel panelTS;
     private javax.swing.JScrollPane panelTable;
     // End of variables declaration//GEN-END:variables
@@ -586,7 +657,9 @@ public class Estategias extends javax.swing.JFrame {
     private ArrayList<String> seleccionados;
     private String control;
     private String archive;
+    private String tablespaces;
     boolean total;
     boolean parcial;
     boolean incremental;
+    int level;
 }
