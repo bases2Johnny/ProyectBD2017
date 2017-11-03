@@ -9,7 +9,7 @@ import controller.ControllerServCon;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import model.CNS;
-import model.ModelServCon;
+import model.models.ModelServCon;
 import model.RowCNS;
 
 /**

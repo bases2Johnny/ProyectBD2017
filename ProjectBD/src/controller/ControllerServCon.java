@@ -2,7 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import model.CNS;
-import model.ModelServCon;
+import model.models.ModelServCon;
 import model.RowCNS;
 
 public class ControllerServCon {

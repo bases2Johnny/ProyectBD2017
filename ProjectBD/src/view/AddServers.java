@@ -5,19 +5,45 @@
  */
 package view;
 
+import controller.AddServerController;
+import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
+import model.Servidor;
+import model.models.AddServerModel;
 import controller.ControllerAddServers;
 
-/**
- *
- * @author casca
- */
 public class AddServers extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Ventana
-     */
-    public AddServers() {
+    private final AddServerController control;
+
+    public AddServers(AddServerController control) {
         initComponents();
+        events();
+        this.control = control;
+    }
+
+    public void events() {
+        btnAceptarRegisterSer.addActionListener(this::eventAceptar);
+    }
+
+    private void eventAceptar(ActionEvent e) {
+        if (this.validateFields()) {
+            String nombreCon = this.nameConexionText.getText();
+            String nombreDB = this.DBNameText.getText();
+            String IP = this.ipText.getText();
+            String PORT = this.portText.getText();
+            server = new Servidor(nombreCon, nombreDB, IP, PORT);
+        } else {
+            JOptionPane.showMessageDialog(null, "Error campos vacios", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("Error campos vacios !!");
+        }
+    }
+
+    private Boolean validateFields() {
+        return !this.nameConexionText.getText().isEmpty()
+                && !this.ipText.getText().isEmpty()
+                && !this.portText.getText().isEmpty()
+                && !this.DBNameText.getText().isEmpty();
     }
 
     /**
@@ -278,7 +304,7 @@ public class AddServers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddServers().setVisible(true);
+                new AddServers(new AddServerController(new AddServerModel())).setVisible(true);
             }
         });
     }
@@ -305,4 +331,6 @@ public class AddServers extends javax.swing.JFrame {
     private javax.swing.JLabel usuario;
     private ControllerAddServers controller;
     // End of variables declaration                   
+    // End of variables declaration    
+    private Servidor server;
 }
