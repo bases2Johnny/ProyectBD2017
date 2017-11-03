@@ -7,6 +7,8 @@ package view;
 
 import File.Ejecutar;
 import controller.ControllerEstrategia;
+import database.Conection;
+import database.DataHandler;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,13 +51,13 @@ public class Estategias extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
+        lunes = new javax.swing.JCheckBox();
+        martes = new javax.swing.JCheckBox();
+        miercoles = new javax.swing.JCheckBox();
+        jueves = new javax.swing.JCheckBox();
+        viernes = new javax.swing.JCheckBox();
+        sabado = new javax.swing.JCheckBox();
+        domingo = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         btnTotal = new javax.swing.JRadioButton();
@@ -65,7 +67,7 @@ public class Estategias extends javax.swing.JFrame {
         Date date = new Date();
         SpinnerDateModel sm =
         new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
-        jSpinner1 = new javax.swing.JSpinner(sm);
+        hora = new javax.swing.JSpinner(sm);
         jLabel7 = new javax.swing.JLabel();
         panelTable = new javax.swing.JScrollPane();
         panelTS = new javax.swing.JPanel();
@@ -77,45 +79,63 @@ public class Estategias extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         level1 = new javax.swing.JRadioButton();
         level0 = new javax.swing.JRadioButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        campoName = new javax.swing.JTextField();
         btnCrear = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel1.setText("Día de ejecución");
 
-        jCheckBox1.setText("Lunes");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        lunes.setText("Lunes");
+        lunes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                lunesActionPerformed(evt);
             }
         });
 
-        jCheckBox2.setText("Martes");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+        martes.setText("Martes");
+        martes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
+                martesActionPerformed(evt);
             }
         });
 
-        jCheckBox3.setText("Miercoles");
-
-        jCheckBox4.setText("Jueves");
-
-        jCheckBox5.setText("Viernes");
-        jCheckBox5.addActionListener(new java.awt.event.ActionListener() {
+        miercoles.setText("Miercoles");
+        miercoles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox5ActionPerformed(evt);
+                miercolesActionPerformed(evt);
             }
         });
 
-        jCheckBox6.setText("Sabado");
+        jueves.setText("Jueves");
+        jueves.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                juevesActionPerformed(evt);
+            }
+        });
 
-        jCheckBox7.setText("Domingo");
+        viernes.setText("Viernes");
+        viernes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viernesActionPerformed(evt);
+            }
+        });
+
+        sabado.setText("Sabado");
+        sabado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sabadoActionPerformed(evt);
+            }
+        });
+
+        domingo.setText("Domingo");
+        domingo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                domingoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -124,32 +144,32 @@ public class Estategias extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox6)
-                    .addComponent(jCheckBox7))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(lunes)
+                    .addComponent(martes)
+                    .addComponent(miercoles)
+                    .addComponent(jueves)
+                    .addComponent(viernes)
+                    .addComponent(sabado)
+                    .addComponent(domingo))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
+                .addComponent(lunes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(martes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox3)
+                .addComponent(miercoles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox4)
+                .addComponent(jueves)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox5)
+                .addComponent(viernes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox6)
+                .addComponent(sabado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox7))
+                .addComponent(domingo))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -207,8 +227,8 @@ public class Estategias extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel6.setText("Hora de ejecución");
 
-        JSpinner.DateEditor de = new JSpinner.DateEditor(jSpinner1, "HH:mm");
-        jSpinner1.setEditor(de);
+        JSpinner.DateEditor de = new JSpinner.DateEditor(hora, "HH:mm");
+        hora.setEditor(de);
 
         jLabel7.setFont(new java.awt.Font("Comic Sans MS", 0, 18)); // NOI18N
         jLabel7.setText("Tablespace");
@@ -286,6 +306,20 @@ public class Estategias extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
+        btnCrear.setText("Aceptar");
+        btnCrear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -303,10 +337,10 @@ public class Estategias extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(panelDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -314,6 +348,12 @@ public class Estategias extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(panelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCrear)
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,71 +368,35 @@ public class Estategias extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelTable, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(panelLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(33, 33, 33))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(panelLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrear)
+                    .addComponent(jButton2)))
         );
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
-        jLabel3.setText("Estrategia");
-
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 24)); // NOI18N
-        jLabel2.setText("Nombre de la estrategia");
-
-        campoName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoNameActionPerformed(evt);
-            }
-        });
-
-        btnCrear.setText("Crear");
-        btnCrear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jLabel3.setText("Crear Estrategia ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(29, 29, 29)
-                                .addComponent(campoName, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(296, 296, 296)
-                .addComponent(btnCrear)
-                .addGap(34, 34, 34)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3))
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,33 +404,35 @@ public class Estategias extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(campoName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private  void horario(java.awt.event.ActionEvent evt){
+         if(!dias.contains(evt.getActionCommand())){
+            dias.add(evt.getActionCommand());
+        }
+         else{
+             dias.remove(evt.getActionCommand());
+         }
+    }
+    
+    private void lunesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lunesActionPerformed
         // TODO add your handling code here:
+       horario(evt);
+    }//GEN-LAST:event_lunesActionPerformed
 
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+    private void martesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_martesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
+        horario(evt);
+    }//GEN-LAST:event_martesActionPerformed
 
-    private void jCheckBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox5ActionPerformed
+    private void viernesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viernesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox5ActionPerformed
+        horario(evt);
+    }//GEN-LAST:event_viernesActionPerformed
 
     private void btnTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalActionPerformed
         // TODO add your handling code here:
@@ -438,11 +444,6 @@ public class Estategias extends javax.swing.JFrame {
         incremental = false;
         panelTable.setVisible(false);
     }//GEN-LAST:event_btnTotalActionPerformed
-
-    private void campoNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNameActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_campoNameActionPerformed
 
     private void btnParcialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnParcialActionPerformed
 
@@ -485,53 +486,60 @@ public class Estategias extends javax.swing.JFrame {
         if (total) {
             if (!"".equals(archive)) {
                 if (!"".equals(control)) {
-                    texto = "\n" + "run \n" + "{\n" + "backup database plus archivelog;\n"
-                            + "backup current controlfile;\n" + "}\n";
+                    texto = "run" + "{" + "backup database plus archivelog;"
+                            + "backup current controlfile;" + "}";
                 } else {
-                    texto = "\n" + "run \n" + "{\n" + "backup database plus archivelog;\n " + "}\n";
+                    texto = "run" + "{" + "backup database plus archivelog; " + "}";
                 }
             } else if (!"".equals(control)) {
-                texto = "\n" + "run \n" + "{\n" + "backup database;\n"
-                        + "backup current controlfile;\n" + "}\n";
+                texto = "run" + "{" + "backup database;"
+                        + "backup current controlfile;" + "}";
             } else {
-                texto = "\n" + "run \n" + "{\n" + "backup database;\n" + "}\n";
+                texto = "run" + "{" + "backup database;" + "}";
             }
         } else if (parcial) {
             if (!"".equals(archive)) {
                 if (!"".equals(control)) {
-                    texto = "\n" + "run \n" + "{\n" + "backup tablespace " + name
-                            + " plus archivelog;\n" + "backup current controlfile;\n" + "}\n";
+                    texto = "run" + "{" + "backup tablespace " + name
+                            + " plus archivelog;" + "backup current controlfile;" + "}";
                 } else {
-                    texto = "\n" + "run \n" + "{\n" + "backup tablespace " + name
-                            + " plus archivelog;\n" + "}\n";
+                    texto = "run" + "{" + "backup tablespace " + name
+                            + " plus archivelog;" + "}";
                 }
             } else if (!"".equals(control)) {
-                texto = "\n" + "run \n" + "{\n" + "backup tablespace " + name + ";\n" + "backup current controlfile;\n" + "}\n";
+                texto = "run" + "{" + "backup tablespace " + name + ";" + "backup current controlfile;" + "}";
 
             } else {
-                texto = "\n" + "run \n" + "{\n" + "backup tablespace " + name + ";\n" + "}\n";
+                texto = "run" + "{" + "backup tablespace " + name + ";" + "}";
             }
         } else if (incremental) {
             if (!"".equals(name)) {
-                texto = "\n" + "run \n" + "{\n" + "backup incremental level " + level + " tablespace " + name + ";\n" + "}\n";
+                texto = "run" + "{" + "backup incremental level " + level + " tablespace " + name + ";" + "}";
             }
             else{
-                texto = "\n" + "run \n" + "{\n" + "backup incremental level " + level + " database;\n" + "}\n";
+                texto = "run" + "{" + "backup incremental level " + level + " database;" + "}";
             }
         }
-
-        controller.write(texto, campoName.getText() + ".txt", "Backups");
-        String bat = "@echo off\n" + "rman target / @C:\\oraclexe\\app\\oracle\\Backups\\" + campoName.getText() + ".txt\nexit";
-        controller.write(bat, campoName.getText() + ".bat", "Bats");
-        JOptionPane.showMessageDialog(null, "Se creó correctamente", "Confirmar", JOptionPane.YES_OPTION);
+        int num = controller.getTam();
+        String days="";
+        int n1=dias.size();
+        for(int i=0;i<n1;i++){
+            if(i==n1-1)
+                days=days.concat(dias.get(i));
+            else{
+                days=days.concat(dias.get(i)+",");
+            }
+        }
+        Date date= (Date)hora.getValue();
+        String sql = "'est"+num+"','"+texto+"','"+days+"','"+date.getHours()+":"+date.getMinutes()+"',"+"'1'"+","+"'0'";
+        System.out.println(sql);
+        controller.insert(sql);
+        //controller.write(texto, campoName.getText() + ".txt", "Backups");
+//        String bat = "@echo off" + "rman target / @C:\\oraclexe\\app\\oracle\\Backups\\" + campoName.getText() + ".txtexit";
+//        controller.write(bat, campoName.getText() + ".bat", "Bats");
+//        JOptionPane.showMessageDialog(null, "Se creó correctamente", "Confirmar", JOptionPane.YES_OPTION);
 
     }//GEN-LAST:event_btnCrearActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Ejecutar exec = new Ejecutar();
-        exec.cargarBat(campoName.getText());
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnControlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnControlActionPerformed
         // TODO add your handling code here:
@@ -550,6 +558,31 @@ public class Estategias extends javax.swing.JFrame {
             archive = evt.getActionCommand();
         }
     }//GEN-LAST:event_btnArchiveActionPerformed
+
+    private void miercolesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miercolesActionPerformed
+        // TODO add your handling code here:
+        horario(evt);
+    }//GEN-LAST:event_miercolesActionPerformed
+
+    private void juevesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_juevesActionPerformed
+        // TODO add your handling code here:
+        horario(evt);
+    }//GEN-LAST:event_juevesActionPerformed
+
+    private void sabadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sabadoActionPerformed
+        // TODO add your handling code here:
+        horario(evt);
+    }//GEN-LAST:event_sabadoActionPerformed
+
+    private void domingoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_domingoActionPerformed
+        // TODO add your handling code here:
+        horario(evt);
+    }//GEN-LAST:event_domingoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
     public void init() {
         control = "";
         archive = "";
@@ -558,6 +591,7 @@ public class Estategias extends javax.swing.JFrame {
         parcial = false;
         incremental = false;
         seleccionados = new ArrayList();
+        dias = new ArrayList();
         panelTS.setLayout(new GridLayout(0, 1));
         controller = new ControllerEstrategia(new ModelEstrategia());
         ArrayList<String> lista = controller.getTablespaces();
@@ -624,17 +658,10 @@ public class Estategias extends javax.swing.JFrame {
     private javax.swing.JRadioButton btnTotal;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JTextField campoName;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox domingo;
+    private javax.swing.JSpinner hora;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -645,13 +672,18 @@ public class Estategias extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JCheckBox jueves;
     private javax.swing.JRadioButton level0;
     private javax.swing.JRadioButton level1;
+    private javax.swing.JCheckBox lunes;
+    private javax.swing.JCheckBox martes;
+    private javax.swing.JCheckBox miercoles;
     private javax.swing.JPanel panelDF;
     private javax.swing.JPanel panelLevel;
     private javax.swing.JPanel panelTS;
     private javax.swing.JScrollPane panelTable;
+    private javax.swing.JCheckBox sabado;
+    private javax.swing.JCheckBox viernes;
     // End of variables declaration//GEN-END:variables
     private ControllerEstrategia controller;
     private ArrayList<String> seleccionados;
@@ -662,4 +694,5 @@ public class Estategias extends javax.swing.JFrame {
     boolean parcial;
     boolean incremental;
     int level;
+    private ArrayList<String> dias;
 }

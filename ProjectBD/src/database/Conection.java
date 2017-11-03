@@ -14,7 +14,6 @@ public class Conection {
             ds = new OracleDataSource();
             ds.setURL(jdbcUrl);
             cn = ds.getConnection(user, password);
-            System.out.print("Sì");
             return cn;
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
