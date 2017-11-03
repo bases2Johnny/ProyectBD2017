@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import model.CNS;
-import model.RowCNS;
 
 public class DataHandler {
 
@@ -29,7 +27,11 @@ public class DataHandler {
             return null;
         }
     }
-
+    
+    public Boolean addServer(String query){
+        return true;
+    }
+    
     public ArrayList<String> getTablespaces() {
         ArrayList<String> lista = new ArrayList();
         try {
@@ -49,7 +51,7 @@ public class DataHandler {
             return null;
         }
     }
-    
+
     public int getEstrategias() {
         int cantidad=0;
         try {
@@ -82,6 +84,7 @@ public class DataHandler {
             System.err.println(e.getMessage());
         }
     }
+
     public CNS getCNS() {
         return null;
     }
