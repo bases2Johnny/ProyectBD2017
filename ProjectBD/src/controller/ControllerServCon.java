@@ -11,15 +11,8 @@ public class ControllerServCon {
         this.modelo = modelo;
     }
 
-    public CNS getCNS() {
-        RowCNS cn0 = new RowCNS();
-        RowCNS cn1 = new RowCNS();
-        RowCNS cn2 = new RowCNS();
-        ArrayList<RowCNS> cons = new ArrayList();
-        cons.add(cn0);
-        cons.add(cn1);
-        cons.add(cn2);
-        CNS c = new CNS(cons);
+    public CNS getCNS() {      
+        CNS c = new CNS(this.modelo.getCNS());
         return c;
     }
     

@@ -8,6 +8,7 @@ package model;
 import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -15,8 +16,8 @@ import javax.swing.JLabel;
  */
 public class RowCNS {
 
-    public RowCNS() {
-        this.nombreText = "Alex";
+    public RowCNS(String nombreText) {
+        this.nombreText = nombreText;
         this.estadoText = "Bueno";
         this.info = null;
 
@@ -25,6 +26,7 @@ public class RowCNS {
         this.estado = new JLabel(this.estadoText);
         this.inspeccionar = new JButton(this.inspeccionarText);
         this.editar = new JButton(this.editarText);
+        this.radioButton = new JRadioButton();
     }
 
     public RowCNS(String nombreText, String estadoText, InformacionCN info) {
@@ -66,7 +68,11 @@ public class RowCNS {
     public InformacionCN getInfo() {
         return info;
     }
-
+    
+    public JRadioButton getRadioButton(){
+        return this.radioButton;
+    }
+    
     /*---------  Text of the components ----------*/
     private String nombreText;
     private String estadoText;
@@ -77,5 +83,6 @@ public class RowCNS {
     private JLabel estado;
     private JButton inspeccionar;
     private JButton editar;
+    private JRadioButton radioButton;
     private InformacionCN info;
 }

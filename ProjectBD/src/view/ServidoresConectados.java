@@ -34,12 +34,13 @@ public class ServidoresConectados extends JFrame {
     }
 
     private void initComponentsMe() {
-        GridLayout layout = new GridLayout(0, 4);
+        GridLayout layout = new GridLayout(0, 5);
         this.bodyPanel.setLayout(layout);
         this.bodyPanel.add(this.nombreCNServ);
         this.bodyPanel.add(this.estadoCNServ);
         this.bodyPanel.add(this.inpecCNServ);
         this.bodyPanel.add(this.editCNServ);
+        this.bodyPanel.add(this.seleccionarCNServ);
     }
 
     private void insertValues() {
@@ -49,6 +50,8 @@ public class ServidoresConectados extends JFrame {
             this.bodyPanel.add(cn.getEstado());
             this.bodyPanel.add(cn.getInspeccionar());
             this.bodyPanel.add(cn.getEditar());
+            this.RadioButtonConectar.add(cn.getRadioButton());
+            this.bodyPanel.add(cn.getRadioButton());
         });
     }
 
@@ -62,6 +65,7 @@ public class ServidoresConectados extends JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        RadioButtonConectar = new javax.swing.ButtonGroup();
         head = new javax.swing.JPanel();
         titleServidores = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -72,6 +76,7 @@ public class ServidoresConectados extends JFrame {
         estadoCNServ = new javax.swing.JLabel();
         inpecCNServ = new javax.swing.JLabel();
         editCNServ = new javax.swing.JLabel();
+        seleccionarCNServ = new javax.swing.JLabel();
         bodyPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -147,10 +152,16 @@ public class ServidoresConectados extends JFrame {
         editCNServ.setMaximumSize(new java.awt.Dimension(100, 14));
         editCNServ.setMinimumSize(new java.awt.Dimension(100, 14));
         editCNServ.setPreferredSize(new java.awt.Dimension(100, 14));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        headerNames.add(editCNServ, gridBagConstraints);
+        headerNames.add(editCNServ, new java.awt.GridBagConstraints());
+
+        seleccionarCNServ.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        seleccionarCNServ.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        seleccionarCNServ.setText("Seleccionar");
+        seleccionarCNServ.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        seleccionarCNServ.setMaximumSize(new java.awt.Dimension(100, 14));
+        seleccionarCNServ.setMinimumSize(new java.awt.Dimension(100, 14));
+        seleccionarCNServ.setPreferredSize(new java.awt.Dimension(100, 14));
+        headerNames.add(seleccionarCNServ, new java.awt.GridBagConstraints());
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -163,11 +174,11 @@ public class ServidoresConectados extends JFrame {
         bodyPanel.setLayout(bodyPanelLayout);
         bodyPanelLayout.setHorizontalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         bodyPanelLayout.setVerticalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 203, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -231,6 +242,7 @@ public class ServidoresConectados extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup RadioButtonConectar;
     private javax.swing.JPanel body;
     private javax.swing.JPanel bodyPanel;
     private javax.swing.JLabel editCNServ;
@@ -241,6 +253,7 @@ public class ServidoresConectados extends JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nombreCNServ;
     private javax.swing.JPanel palenContainTable;
+    private javax.swing.JLabel seleccionarCNServ;
     private javax.swing.JLabel titleServidores;
     // End of variables declaration//GEN-END:variables
 }

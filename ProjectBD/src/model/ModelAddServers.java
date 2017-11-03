@@ -5,24 +5,23 @@
  */
 package model;
 
+import File.File;
 import database.Conection;
 import database.DataHandler;
 import java.util.ArrayList;
 
 /**
  *
- * @author jimen
+ * @author usuario
  */
-public class ModelServCon {
-
-    public ModelServCon() {
+public class ModelAddServers {
+    public ModelAddServers() {
         this.dbH = new DataHandler(new Conection());
     }
-    public ArrayList<RowCNS>  getCNS(){
-        return this.dbH.getCNS();
+
+    public void addServer() {
+        dbH.AddServer();
     }
-   
-    private CNS cns;
+
     private DataHandler dbH;
-    private CNS conecs;
 }

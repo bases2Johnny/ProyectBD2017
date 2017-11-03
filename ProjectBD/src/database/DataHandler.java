@@ -50,9 +50,42 @@ public class DataHandler {
         }
     }
 
-    public CNS getCNS() {
-        return null;
+    public ArrayList<RowCNS> getCNS() {
+        ArrayList<RowCNS> lista = new ArrayList();
+        try {
+            Connection conn = cn.connect();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            query = "select DB_LINK from DBA_DB_LINKS";
+            rset = stmt.executeQuery(query);
+            while(rset.next()){
+                RowCNS rowcns = new RowCNS(rset.getString("DB_LINK"));
+                lista.add(rowcns);
+            }
+            cn.disconnect();
+            return lista;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
     }
+    
+    public void AddServer(){
+        try {
+            Connection conn = cn.connect();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            query = "select DB_LINK from DBA_DB_LINKS";
+            rset = stmt.executeQuery(query);
+            while(rset.next()){
+                RowCNS rowcns = new RowCNS(rset.getString("DB_LINK"));
+            }
+            cn.disconnect();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+    
     Statement stmt;
     ResultSet rset;
     String query;
