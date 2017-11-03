@@ -27,6 +27,7 @@ public class RowCNS {
         this.inspeccionar = new JButton(this.inspeccionarText);
         this.editar = new JButton(this.editarText);
         this.radioButton = new JRadioButton();
+        this.radioButton.setActionCommand(nombreText);
     }
 
     public RowCNS(String nombreText, String estadoText, InformacionCN info) {
