@@ -13,11 +13,14 @@ import java.util.Objects;
  */
 public class Servidor {
 
-    public Servidor(String nombre, String DB, String ip, String puerto) {
+    public Servidor(String nombre, String DB, String ip, String puerto, String user, String pass) {
         this.nombre = nombre;
         this.DB = DB;
         this.ip = ip;
         this.puerto = puerto;
+        this.user = user;
+        this.pass = pass;
+
     }
 
     public String getNombre() {
@@ -93,9 +96,27 @@ public class Servidor {
     public String toString() {
         return "Servidor{" + "nombre=" + nombre + ", DB=" + DB + ", ip=" + ip + ", puerto=" + puerto + '}';
     }
-    
+
     private String nombre;
     private String DB;
     private String ip;
     private String puerto;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+    private String user;
+    private String pass;
 }

@@ -1,5 +1,6 @@
 package database;
 
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import model.CNS;
 import model.RowCNS;
+import model.Servidor;
 
 public class DataHandler {
 
@@ -30,9 +32,6 @@ public class DataHandler {
         }
     }
     
-    public Boolean addServer(String query){
-        return true;
-    }
     
     public ArrayList<String> getTablespaces() {
         ArrayList<String> lista = new ArrayList();
@@ -76,19 +75,31 @@ public class DataHandler {
         }
     }
     
-    public void AddServer(){
+    public ArrayList<Object> AddServer(Servidor server){
+        ArrayList<Object> lista = new ArrayList<>();
         try {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "select DB_LINK from DBA_DB_LINKS";
+            query = "create public database link "+ server.getNombre() +"\n" +
+            "connect to "+ server.getUser() +" identified by "+ server.getPass() +"\n" +
+            "using '(DESCRIPTION =\n" +
+            "    (ADDRESS = (PROTOCOL = TCP)(HOST = "+ server.getIp() +")(PORT = "+ server.getPuerto() +"))\n" +
+            "    (CONNECT_DATA =\n" +
+            "      (SERVER = DEDICATED)\n" +
+            "      (SERVICE_NAME = "+ server.getDB() +")\n" +
+            "    )\n" +
+            "  )'";
             rset = stmt.executeQuery(query);
-            while(rset.next()){
-                RowCNS rowcns = new RowCNS(rset.getString("DB_LINK"));
-            }
             cn.disconnect();
+            lista.add(true);
+            lista.add("se creo exitosamente la coneccion");
+            return lista;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+            lista.add(false);
+            lista.add(e.getLocalizedMessage());
+            return lista;
         }
     }
 

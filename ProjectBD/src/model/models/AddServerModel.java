@@ -2,6 +2,7 @@ package model.models;
 
 import database.Conection;
 import database.DataHandler;
+import java.util.ArrayList;
 import model.Servidor;
 
 public class AddServerModel {
@@ -9,9 +10,8 @@ public class AddServerModel {
     public AddServerModel() {
         this.dbH = new DataHandler(new Conection());
     }
-    public Boolean createNewServer(Servidor server){
-        String query = "";
-        return dbH.addServer(query);
+    public ArrayList<Object> createNewServer(Servidor server){
+        return dbH.AddServer(server);
     }
     private final DataHandler dbH;
 }

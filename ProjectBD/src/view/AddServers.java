@@ -7,10 +7,10 @@ package view;
 
 import controller.AddServerController;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Servidor;
 import model.models.AddServerModel;
-import controller.ControllerAddServers;
 
 public class AddServers extends javax.swing.JFrame {
 
@@ -32,7 +32,14 @@ public class AddServers extends javax.swing.JFrame {
             String nombreDB = this.DBNameText.getText();
             String IP = this.ipText.getText();
             String PORT = this.portText.getText();
-            server = new Servidor(nombreCon, nombreDB, IP, PORT);
+            String user = this.usernameText.getText();
+            String pass = String.valueOf(this.passwordText.getPassword());
+            server = new Servidor(nombreCon, nombreDB, IP, PORT, user, pass);
+            ArrayList<Object> msm = this.control.addServer(server); 
+            if((Boolean) msm.get(0))
+                JOptionPane.showMessageDialog(null, msm.get(1));
+            else
+                JOptionPane.showMessageDialog(null, msm.get(1), "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Error campos vacios", "Error", JOptionPane.ERROR_MESSAGE);
             System.err.println("Error campos vacios !!");
@@ -268,10 +275,7 @@ public class AddServers extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-    
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {
-    
-    }   
+      
     
     /**
      * @param args the command line arguments
@@ -329,7 +333,6 @@ public class AddServers extends javax.swing.JFrame {
     private javax.swing.JLabel username;
     private javax.swing.JTextField usernameText;
     private javax.swing.JLabel usuario;
-    private ControllerAddServers controller;
     // End of variables declaration                   
     // End of variables declaration    
     private Servidor server;
