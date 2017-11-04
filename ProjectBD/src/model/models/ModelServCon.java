@@ -5,7 +5,6 @@
  */
 package model.models;
 
-import controller.ControllerServCon;
 import database.Conection;
 import database.DataHandler;
 import model.CNS;
@@ -22,7 +21,7 @@ public class ModelServCon {
     public CNS getCNS(){
         return this.dbH.getCNS();
     }
-    
+   
     private CNS cns;
     private DataHandler dbH;
     private CNS conecs;

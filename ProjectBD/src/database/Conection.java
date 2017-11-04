@@ -14,14 +14,17 @@ public class Conection {
             ds = new OracleDataSource();
             ds.setURL(jdbcUrl);
             cn = ds.getConnection(user, password);
+<<<<<<< HEAD
             System.out.println("Si me conecté");
+=======
+            System.out.print("Sì");
+>>>>>>> 5573416f1abdf1eefd3070eccc7f1844991b06df
             return cn;
         } catch (SQLException ex) {
-            
-            
             System.err.println(ex.getMessage());
-            return null;
+            //return null;
         }
+        return null;
     }
 
     public Boolean disconnect() {
@@ -35,8 +38,8 @@ public class Conection {
     }
     
     private Connection cn;
-    private final String user = "alex";
-    private final String password = "alex";
+    private final String user = "maikol";
+    private final String password = "maikol";
     private final String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:xe";
     private OracleDataSource ds;
 }
