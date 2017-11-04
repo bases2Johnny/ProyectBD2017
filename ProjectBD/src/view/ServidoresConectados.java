@@ -7,10 +7,11 @@ package view;
 
 import controller.ControllerServCon;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import model.CNS;
 import model.models.ModelServCon;
-import model.RowCNS;
 
 /**
  *
@@ -32,7 +33,6 @@ public class ServidoresConectados extends JFrame {
         initComponentsMe();
         insertValues();
     }
-
     private void initComponentsMe() {
         GridLayout layout = new GridLayout(0, 5);
         this.bodyPanel.setLayout(layout);
@@ -41,6 +41,9 @@ public class ServidoresConectados extends JFrame {
         this.bodyPanel.add(this.inpecCNServ);
         this.bodyPanel.add(this.editCNServ);
         this.bodyPanel.add(this.seleccionarCNServ);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
+        
     }
 
     private void insertValues() {
@@ -50,6 +53,13 @@ public class ServidoresConectados extends JFrame {
             this.bodyPanel.add(cn.getEstado());
             this.bodyPanel.add(cn.getInspeccionar());
             this.bodyPanel.add(cn.getEditar());
+            cn.getRadioButton().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    name=e.getActionCommand();
+                    btnCreate.setEnabled(true);
+                }
+            });
             this.RadioButtonConectar.add(cn.getRadioButton());
             this.bodyPanel.add(cn.getRadioButton());
         });
@@ -78,6 +88,8 @@ public class ServidoresConectados extends JFrame {
         editCNServ = new javax.swing.JLabel();
         seleccionarCNServ = new javax.swing.JLabel();
         bodyPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        btnCreate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(629, 371));
@@ -202,8 +214,51 @@ public class ServidoresConectados extends JFrame {
         gridBagConstraints.weighty = 0.1;
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
+        btnCreate.setText("Crear Estrategia");
+        btnCreate.setEnabled(false);
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 111, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(btnCreate)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 23, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(btnCreate)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        getContentPane().add(jPanel1, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        ventana = new Estategias();
+        ventana.setVisible(true);
+        ventana.setServerName(this.name);
+        ventana.setVentana(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCreateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,15 +300,19 @@ public class ServidoresConectados extends JFrame {
     private javax.swing.ButtonGroup RadioButtonConectar;
     private javax.swing.JPanel body;
     private javax.swing.JPanel bodyPanel;
+    private javax.swing.JButton btnCreate;
     private javax.swing.JLabel editCNServ;
     private javax.swing.JLabel estadoCNServ;
     private javax.swing.JPanel head;
     private javax.swing.JPanel headerNames;
     private javax.swing.JLabel inpecCNServ;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nombreCNServ;
     private javax.swing.JPanel palenContainTable;
     private javax.swing.JLabel seleccionarCNServ;
     private javax.swing.JLabel titleServidores;
     // End of variables declaration//GEN-END:variables
+    private String name;
+    Estategias ventana;
 }

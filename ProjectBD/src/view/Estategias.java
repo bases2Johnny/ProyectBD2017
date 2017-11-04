@@ -5,10 +5,8 @@
  */
 package view;
 
-import File.Ejecutar;
 import controller.ControllerEstrategia;
-import database.Conection;
-import database.DataHandler;
+import controller.ControllerServCon;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JCheckBox;
-import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import model.ModelEstrategia;
@@ -34,7 +31,12 @@ public class Estategias extends javax.swing.JFrame {
         initComponents();
         init();
     }
-
+    public void setServerName(String name){
+        this.serverName=name;
+    }
+    public void setVentana(ServidoresConectados a){
+        this.ventana = a;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -80,7 +82,7 @@ public class Estategias extends javax.swing.JFrame {
         level1 = new javax.swing.JRadioButton();
         level0 = new javax.swing.JRadioButton();
         btnCrear = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -313,10 +315,10 @@ public class Estategias extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCancelActionPerformed(evt);
             }
         });
 
@@ -352,7 +354,7 @@ public class Estategias extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCrear)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2)
+                .addComponent(btnCancel)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -381,7 +383,7 @@ public class Estategias extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear)
-                    .addComponent(jButton2)))
+                    .addComponent(btnCancel)))
         );
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
@@ -579,10 +581,11 @@ public class Estategias extends javax.swing.JFrame {
         horario(evt);
     }//GEN-LAST:event_domingoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jButton2ActionPerformed
+        this.ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
     public void init() {
         control = "";
         archive = "";
@@ -612,6 +615,8 @@ public class Estategias extends javax.swing.JFrame {
         panelTable.setVisible(false);
         panelDF.setVisible(false);
         panelLevel.setVisible(false);
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -650,6 +655,7 @@ public class Estategias extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox btnArchive;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JCheckBox btnControl;
     private javax.swing.JButton btnCrear;
     private javax.swing.JRadioButton btnIncremental;
@@ -660,7 +666,6 @@ public class Estategias extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JCheckBox domingo;
     private javax.swing.JSpinner hora;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -695,4 +700,6 @@ public class Estategias extends javax.swing.JFrame {
     boolean incremental;
     int level;
     private ArrayList<String> dias;
+    private String serverName;
+    private ServidoresConectados ventana;
 }
