@@ -25,7 +25,8 @@ select * from dual@nivardo;
 -- Para eliminar el database link
 drop public database link nivardo;
 
-
+/* ···························· TABLA DE ESTRATEGIAS ···························· */
+create table estrategias (name varchar2(20),estrategia varchar2(2000),dias varchar2(2000),hora varchar2(10),estado varchar2(2),ejecutado varchar2(2));
 
 
 

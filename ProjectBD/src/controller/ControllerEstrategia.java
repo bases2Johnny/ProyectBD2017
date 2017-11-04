@@ -14,11 +14,11 @@ public class ControllerEstrategia {
     public void write(String texto,String name,String dir){
         modelo.write(texto,name,dir);
     }
-    public void insert(String sql){
-        modelo.insert(sql);
+    public void insert(String sql, String name){
+        modelo.insert(sql,name);
     }
-    public int getTam(){
-        return modelo.getTam();
+    public int getTam(String name){
+        return modelo.getTam(name);
     }
     
     ModelEstrategia modelo;

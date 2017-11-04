@@ -542,7 +542,7 @@ public class Estategias extends javax.swing.JFrame {
                 texto = "run" + "{" + "backup incremental level " + level + " database;" + "}";
             }
         }
-        int num = controller.getTam();
+        int num = controller.getTam("@"+this.ventana.getServerName());
         String days="";
         int n1=dias.size();
         for(int i=0;i<n1;i++){
@@ -555,7 +555,7 @@ public class Estategias extends javax.swing.JFrame {
         Date date= (Date)hora.getValue();
         String sql = "'est"+num+"','"+texto+"','"+days+"','"+date.getHours()+":"+date.getMinutes()+"',"+"'1'"+","+"'0'";
         System.out.println(sql);
-        controller.insert(sql);
+        controller.insert(sql,"@"+this.ventana.getServerName());
         //controller.write(texto, campoName.getText() + ".txt", "Backups");
 //        String bat = "@echo off" + "rman target / @C:\\oraclexe\\app\\oracle\\Backups\\" + campoName.getText() + ".txtexit";
 //        controller.write(bat, campoName.getText() + ".bat", "Bats");
