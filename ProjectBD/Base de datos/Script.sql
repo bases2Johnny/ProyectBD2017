@@ -1,106 +1,30 @@
-create or replace type Dia as object(
-    -- ATRIBUTOS DEL OBJETO 
-	nombre varchar2(10),
-	hora varchar2(10),
-	-- CONSTRUCTOR DEL OBJETO	
-	constructor function Dia(a varchar2) return self as result,
-	--FUNCIONES
-	member function getNombre return varchar2,
-	member function getHora return varchar2
-);
-/
+/* ----------------------------- DATABASE LINK ----------------------------- */
+-- USUARIO
+create user servidor identified by servidor;
 
-create or replace type body Dia
-IS
-	-- CONSTRUCTOR DEL OBJETO
-	constructor function Dia(a varchar2) return self as result
-	is
-		begin
-			self.nombre := a;
-			self.hora := a;
-		return;
-	end;
-	member function getNombre return varchar2
-	is
-		begin
-			return self.nombre;
-	end;
-	member function getHora return varchar2
-	is
-		begin
-			return self.hora;
-	end;
-END;	
-/
+grant connect to servidor;
 
-create type Dias as table of Dia;
-/
----------------------------------------------------------------------------------------
-create or replace type Tablespace as object(
-    -- ATRIBUTOS DEL OBJETO 
-	nombre varchar2(10),
-	-- CONSTRUCTOR DEL OBJETO	
-	constructor function Tablespace(a varchar2) return self as result,
-	--FUNCIONES
-	member function getNombre return varchar2
-);
-/
+grant dba to servidor;
 
-create or replace type body Tablespace
-IS
-	-- CONSTRUCTOR DEL OBJETO
-	constructor function Tablespace(a varchar2) return self as result
-	is
-		begin
-			self.nombre := a;
-		return;
-	end;
-	member function getNombre return varchar2
-	is
-		begin
-			return self.nombre;
-	end;
-END;	
-/
+grant resource to servidor;
 
-create type Tablespaces as table of Tablespace;
-/
-----------------------------------------------------------------------------------------
-create or replace type DataFile as object(
-    -- ATRIBUTOS DEL OBJETO 
-	nombre varchar2(10),
-	-- CONSTRUCTOR DEL OBJETO	
-	constructor function DataFile(a varchar2) return self as result,
-	--FUNCIONES
-	member function getNombre return varchar2
-);
-/
+-- DATABASE LINK A USUARIO 'nombre'
+create public database link nivardo
+connect to nivardo identified by nivardo
+using '(DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.2.7)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = ORCL)
+    )
+  )';
 
-create or replace type body DataFile
-IS
-	-- CONSTRUCTOR DEL OBJETO
-	constructor function DataFile(a varchar2) return self as result
-	is
-		begin
-			self.nombre := a;
-		return;
-	end;
-	member function getNombre return varchar2
-	is
-		begin
-			return self.nombre;
-	end;
-END;	
-/
+-- Para comprobar la conexion 
+select * from dual@nivardo;
 
-create type DataFiles as table of DataFile;
-/
+-- Para eliminar el database link
+drop public database link nivardo;
 
-
-
-
-----------------------------------------------------------------------------------------
-create table estrategias (dias Dias, tipo varchar2(20),tablespaces Tablespaces,dtfile DataFiles);
 
 
 
