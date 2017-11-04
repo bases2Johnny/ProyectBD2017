@@ -124,14 +124,15 @@ public class DataHandler {
     }
     
     public void insertEstrategia(String sql, String name){
+        String commit="commit";
          try {
             Connection conn = cn.connect();
             stmt = conn.createStatement();
-            query = "insert into estrategias"+name+"values("+sql+")";
+            query = "insert into estrategias "+name+" values("+sql+")";
             System.out.println(query);
             rset = stmt.executeQuery(query);
+            stmt.executeQuery(commit);
             cn.disconnect();
-            stmt.executeUpdate(query);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }

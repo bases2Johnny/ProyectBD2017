@@ -556,6 +556,8 @@ public class Estategias extends javax.swing.JFrame {
         String sql = "'est"+num+"','"+texto+"','"+days+"','"+date.getHours()+":"+date.getMinutes()+"',"+"'1'"+","+"'0'";
         System.out.println(sql);
         controller.insert(sql,"@"+this.ventana.getServerName());
+        this.ventana.setVisible(true);
+        this.setVisible(false);
         //controller.write(texto, campoName.getText() + ".txt", "Backups");
 //        String bat = "@echo off" + "rman target / @C:\\oraclexe\\app\\oracle\\Backups\\" + campoName.getText() + ".txtexit";
 //        controller.write(bat, campoName.getText() + ".bat", "Bats");
