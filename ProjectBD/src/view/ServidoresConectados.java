@@ -116,6 +116,7 @@ public class ServidoresConectados extends JFrame {
         bodyPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnCreate = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(629, 371));
@@ -271,8 +272,19 @@ public class ServidoresConectados extends JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         getContentPane().add(jPanel1, gridBagConstraints);
+
+        btnAgregar.setText("Agregar Servidor");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        getContentPane().add(btnAgregar, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -286,6 +298,13 @@ public class ServidoresConectados extends JFrame {
         ventana.paintTablespaces();
         this.setVisible(false);
     }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        this.ventanaAddServers = new AddServers(new AddServerController(new AddServerModel()),true);
+        this.ventanaAddServers.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,6 +346,7 @@ public class ServidoresConectados extends JFrame {
     private javax.swing.ButtonGroup RadioButtonConectar;
     private javax.swing.JPanel body;
     private javax.swing.JPanel bodyPanel;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCreate;
     private javax.swing.JLabel editCNServ;
     private javax.swing.JLabel estadoCNServ;
@@ -343,4 +363,5 @@ public class ServidoresConectados extends JFrame {
     private String name;
     Estategias ventana;
     AddServers ventanaAddServers;
+
 }

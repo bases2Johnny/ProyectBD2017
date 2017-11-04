@@ -28,11 +28,11 @@ public class ModelEstrategia {
         file = new File();
         file.write(texto,name,dir);
     }
-    public void insert(String sql){
-        dbH.insertEstrategia(sql);
+    public void insert(String sql, String name){
+        dbH.insertEstrategia(sql,name);
     }
-    public int getTam(){
-        return dbH.getEstrategias();
+    public int getTam(String name){
+        return dbH.getEstrategias(name);
     }
     
     private DataHandler dbH;

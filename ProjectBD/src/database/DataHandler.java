@@ -140,14 +140,16 @@ public class DataHandler {
  
     }
     
-    public int getEstrategias() {
+
+    public int getEstrategias(String name) {
+
         int cantidad=0;
 
         try {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "select count(name) from estrategias";
+            query = "select count(name) from estrategias"+name;
             rset = stmt.executeQuery(query);
             rset.next();
             cantidad=rset.getInt(1);
@@ -160,15 +162,16 @@ public class DataHandler {
         }
     }
     
-    public void insertEstrategia(String sql){
+    public void insertEstrategia(String sql, String name){
+        String commit="commit";
          try {
             Connection conn = cn.connect();
             stmt = conn.createStatement();
-            query = "insert into estrategias values("+sql+")";
+            query = "insert into estrategias "+name+" values("+sql+")";
             System.out.println(query);
             rset = stmt.executeQuery(query);
+            stmt.executeQuery(commit);
             cn.disconnect();
-            stmt.executeUpdate(query);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
