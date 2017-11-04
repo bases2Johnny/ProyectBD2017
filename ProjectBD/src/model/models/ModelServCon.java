@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.models;
 
 import controller.ControllerServCon;
 import database.Conection;
 import database.DataHandler;
+import model.CNS;
 
 /**
  *
