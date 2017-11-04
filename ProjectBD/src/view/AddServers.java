@@ -19,6 +19,8 @@ public class AddServers extends javax.swing.JFrame {
     public AddServers(AddServerController control) {
         initComponents();
         events();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
         this.control = control;
     }
 
@@ -35,11 +37,12 @@ public class AddServers extends javax.swing.JFrame {
             String user = this.usernameText.getText();
             String pass = String.valueOf(this.passwordText.getPassword());
             server = new Servidor(nombreCon, nombreDB, IP, PORT, user, pass);
-            ArrayList<Object> msm = this.control.addServer(server); 
-            if((Boolean) msm.get(0))
+            ArrayList<Object> msm = this.control.addServer(server);
+            if ((Boolean) msm.get(0)) {
                 JOptionPane.showMessageDialog(null, msm.get(1));
-            else
+            } else {
                 JOptionPane.showMessageDialog(null, msm.get(1), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Error campos vacios", "Error", JOptionPane.ERROR_MESSAGE);
             System.err.println("Error campos vacios !!");
@@ -60,13 +63,12 @@ public class AddServers extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code"> 
-    
+
 //    btnCrear.addActionListener(new java.awt.event.ActionListener() {
 //            public void actionPerformed(java.awt.event.ActionEvent evt) {
 //                btnCrearActionPerformed(evt);
 //            }
 //        });
-    
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
@@ -275,8 +277,7 @@ public class AddServers extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-      
-    
+
     /**
      * @param args the command line arguments
      */
