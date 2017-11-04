@@ -8,8 +8,8 @@ public class ControllerEstrategia {
      public ControllerEstrategia(ModelEstrategia modelo) {
         this.modelo = modelo;
     }
-    public ArrayList<String> getTablespaces(){
-        return modelo.getTablespaces();
+    public ArrayList<String> getTablespaces(String name){
+        return modelo.getTablespaces(name);
     }
     public void write(String texto,String name,String dir){
         modelo.write(texto,name,dir);

@@ -20,8 +20,8 @@ public class ModelEstrategia {
         this.dbH = new DataHandler(new Conection());
     }
 
-    public ArrayList<String> getTablespaces() {
-        return dbH.getTablespaces();
+    public ArrayList<String> getTablespaces(String name) {
+        return dbH.getTablespaces(name);
     }
 
     public void write(String texto,String name,String dir) {

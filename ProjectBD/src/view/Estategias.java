@@ -30,6 +30,7 @@ public class Estategias extends javax.swing.JFrame {
     public Estategias() {
         initComponents();
         init();
+        
     }
     public void setServerName(String name){
         this.serverName=name;
@@ -37,6 +38,25 @@ public class Estategias extends javax.swing.JFrame {
     public void setVentana(ServidoresConectados a){
         this.ventana = a;
     }
+    
+    public void paintTablespaces(){
+        ArrayList<String> lista = controller.getTablespaces("@"+this.ventana.getServerName());
+        for (String ts : lista) {
+            JCheckBox box = new JCheckBox(ts);
+            box.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (!seleccionados.contains(e.getActionCommand())) {
+                        seleccionados.add(e.getActionCommand());
+                    } else {
+                        seleccionados.remove(e.getActionCommand());
+                    }
+                }
+            });
+            this.panelTS.add(box);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -597,21 +617,7 @@ public class Estategias extends javax.swing.JFrame {
         dias = new ArrayList();
         panelTS.setLayout(new GridLayout(0, 1));
         controller = new ControllerEstrategia(new ModelEstrategia());
-        ArrayList<String> lista = controller.getTablespaces();
-        for (String ts : lista) {
-            JCheckBox box = new JCheckBox(ts);
-            box.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (!seleccionados.contains(e.getActionCommand())) {
-                        seleccionados.add(e.getActionCommand());
-                    } else {
-                        seleccionados.remove(e.getActionCommand());
-                    }
-                }
-            });
-            this.panelTS.add(box);
-        }
+        
         panelTable.setVisible(false);
         panelDF.setVisible(false);
         panelLevel.setVisible(false);

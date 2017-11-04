@@ -57,6 +57,7 @@ public class ServidoresConectados extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     name=e.getActionCommand();
+                    System.out.println(e.getActionCommand());
                     btnCreate.setEnabled(true);
                 }
             });
@@ -64,7 +65,10 @@ public class ServidoresConectados extends JFrame {
             this.bodyPanel.add(cn.getRadioButton());
         });
     }
-
+    
+    public String getServerName(){
+        return this.name;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -257,6 +261,7 @@ public class ServidoresConectados extends JFrame {
         ventana.setVisible(true);
         ventana.setServerName(this.name);
         ventana.setVentana(this);
+        ventana.paintTablespaces();
         this.setVisible(false);
     }//GEN-LAST:event_btnCreateActionPerformed
 

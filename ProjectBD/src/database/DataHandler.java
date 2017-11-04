@@ -33,13 +33,13 @@ public class DataHandler {
     }
     
     
-    public ArrayList<String> getTablespaces() {
+    public ArrayList<String> getTablespaces(String name) {
         ArrayList<String> lista = new ArrayList();
         try {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "select tablespace_name from dba_tablespaces";
+            query = "select tablespace_name from dba_tablespaces" + name;
             rset = stmt.executeQuery(query);
             while(rset.next()){
                 
