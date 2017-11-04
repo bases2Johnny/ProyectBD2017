@@ -5,12 +5,15 @@
  */
 package view;
 
+import controller.AddServerController;
 import controller.ControllerServCon;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import model.CNS;
+import model.models.AddServerModel;
 import model.models.ModelServCon;
 
 /**
@@ -52,6 +55,12 @@ public class ServidoresConectados extends JFrame {
             this.bodyPanel.add(cn.getNombre());
             this.bodyPanel.add(cn.getEstado());
             this.bodyPanel.add(cn.getInspeccionar());
+            cn.getEditar().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    editar(cn.getNombre().getText());
+                }
+            });
             this.bodyPanel.add(cn.getEditar());
             cn.getRadioButton().addActionListener(new ActionListener() {
                 @Override
@@ -68,6 +77,19 @@ public class ServidoresConectados extends JFrame {
     
     public String getServerName(){
         return this.name;
+    }
+    
+    public void editar(String nombre){
+        this.ventanaAddServers = new AddServers(new AddServerController(new AddServerModel()),false);
+        ArrayList<String> lista = this.ventanaAddServers.control.getValues(nombre);
+        this.ventanaAddServers.setNameConexionText(lista.get(0));
+        this.ventanaAddServers.setDBNameText(lista.get(1));
+        this.ventanaAddServers.setIpText(lista.get(2));
+        this.ventanaAddServers.setPortText(lista.get(3));
+        this.ventanaAddServers.setUsernameText(lista.get(4));
+        this.ventanaAddServers.setPasswordText(lista.get(5));
+        this.ventanaAddServers.setVisible(true);
+        this.setVisible(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -320,4 +342,5 @@ public class ServidoresConectados extends JFrame {
     // End of variables declaration//GEN-END:variables
     private String name;
     Estategias ventana;
+    AddServers ventanaAddServers;
 }

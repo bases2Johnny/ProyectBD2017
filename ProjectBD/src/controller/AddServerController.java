@@ -14,5 +14,16 @@ public class AddServerController {
         return model.createNewServer(server);
     }
     
+    public ArrayList<String> getValues(String nombre) {
+        return model.getValues(nombre);
+    }
+    
+    public ArrayList<Object> editServer(Servidor server) {
+        return model.editServer(server);
+    }
+    
     private final AddServerModel model;
+
+    
+
 }
