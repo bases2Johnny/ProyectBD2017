@@ -45,7 +45,7 @@ public class ServidoresConectados extends JFrame {
         this.bodyPanel.add(this.seleccionarCNServ);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        
+        sC=this;
     }
 
     private void insertValues() {
@@ -61,6 +61,16 @@ public class ServidoresConectados extends JFrame {
                     name=e.getActionCommand();
                     System.out.println(e.getActionCommand());
                     btnCreate.setEnabled(true);
+                }
+            });
+            cn.getInspeccionar().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    le=new ListaEstrategias();
+                    le.setVisible(true);
+                    sC.setVisible(false);
+                    le.setNameServer(name);
+
                 }
             });
             this.RadioButtonConectar.add(cn.getRadioButton());
@@ -343,4 +353,6 @@ public class ServidoresConectados extends JFrame {
     private String name;
     Estategias ventana;
     AddServers ventana2;
+    ListaEstrategias le;
+    ServidoresConectados sC;
 }
