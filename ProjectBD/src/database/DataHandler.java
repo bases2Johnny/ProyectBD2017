@@ -1,12 +1,11 @@
 package database;
 
-import java.awt.List;
+import model.Estrategia;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import model.CNS;
 import model.RowCNS;
 import model.Servidor;
 
@@ -61,10 +60,10 @@ public class DataHandler {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "select DB_LINK from DBA_DB_LINKS";
+            query = "select nombreconexion from databaselinkserver";
             rset = stmt.executeQuery(query);
             while(rset.next()){
-                RowCNS rowcns = new RowCNS(rset.getString("DB_LINK"));
+                RowCNS rowcns = new RowCNS(rset.getString("nombreconexion"));
                 lista.add(rowcns);
             }
             cn.disconnect();
@@ -161,7 +160,26 @@ public class DataHandler {
             return 0;
         }
     }
-    
+    public ArrayList<Estrategia> getEstrategias1(String name) {
+        ArrayList<Estrategia> lista=new ArrayList<>();
+        try {
+            Connection conn = cn.connect();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            query = "select * from estrategias";
+            rset = stmt.executeQuery(query);
+            while(rset.next()){
+                lista.add(
+                        new Estrategia(rset.getString(1),rset.getString(2),
+                                rset.getString(3),rset.getString(4),rset.getString(5),rset.getString(6)));
+            }
+            cn.disconnect();
+            return lista;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+    }
     public void insertEstrategia(String sql, String name){
         String commit="commit";
          try {

@@ -1,89 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
-import java.util.ArrayList;
-import java.util.Objects;
-
-/**
- *
- * @author casca
- */
 public class Estrategia {
 
-    public Estrategia(TipoEstrategia tipo, String nombre, ArrayList<String> dias, String hora) {
-        this.tipo = tipo;
-        this.nombre = nombre;
+    public Estrategia(String name, String estrategia, String dias, String hora, String estado, String ejecutado) {
+        this.name = name;
         this.dias = dias;
         this.hora = hora;
+        this.estrategia = estrategia;
+        this.estado = estado;
+        this.ejecutado = ejecutado;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.tipo);
-        hash = 97 * hash + Objects.hashCode(this.nombre);
-        hash = 97 * hash + Objects.hashCode(this.dias);
-        hash = 97 * hash + Objects.hashCode(this.hora);
-        return hash;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Estrategia other = (Estrategia) obj;
-        if (!Objects.equals(this.nombre, other.nombre)) {
-            return false;
-        }
-        if (!Objects.equals(this.hora, other.hora)) {
-            return false;
-        }
-        if (!Objects.equals(this.tipo, other.tipo)) {
-            return false;
-        }
-        if (!Objects.equals(this.dias, other.dias)) {
-            return false;
-        }
-        return true;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Estrategia{" + "tipo=" + tipo + ", nombre=" + nombre + ", dias=" + dias + ", hora=" + hora + '}';
-    }
-
-    public TipoEstrategia getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoEstrategia tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public ArrayList<String> getDias() {
+    public String getDias() {
         return dias;
     }
 
-    public void setDias(ArrayList<String> dias) {
+    public void setDias(String dias) {
         this.dias = dias;
     }
 
@@ -94,10 +35,40 @@ public class Estrategia {
     public void setHora(String hora) {
         this.hora = hora;
     }
+
+    public String getEstrategia() {
+        return estrategia;
+    }
+
+    public void setEstrategia(String estrategia) {
+        this.estrategia = estrategia;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getEjecutado() {
+        return ejecutado;
+    }
+
+    public void setEjecutado(String ejecutado) {
+        this.ejecutado = ejecutado;
+    }
+
+    @Override
+    public String toString() {
+        return "Estrategia{" + "name=" + name + ", dias=" + dias + ", hora=" + hora + ", estrategia=" + estrategia + ", estado=" + estado + ", ejecutado=" + ejecutado + '}';
+    }
     
-    
-    private TipoEstrategia tipo;
-    private String nombre;
-    private ArrayList<String> dias;
+    private String name;
+    private String dias;
     private String hora;
+    private String estrategia;
+    private String estado;
+    private String ejecutado;
 }
