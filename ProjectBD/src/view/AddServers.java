@@ -49,7 +49,10 @@ public class AddServers extends javax.swing.JFrame {
                 msm = this.control.editServer(server);
 
             if ((Boolean) msm.get(0)) {
-                JOptionPane.showMessageDialog(null, msm.get(1));
+                int val = JOptionPane.showOptionDialog(null, msm.get(1), "", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                if(val == 0)
+                    this.regresar();
             } else {
                 JOptionPane.showMessageDialog(null, msm.get(1), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -68,6 +71,12 @@ public class AddServers extends javax.swing.JFrame {
         
     public void regresar(){
         this.setVisible(false);
+//        this.servidoresConectados.insertValues();
+        this.servidoresConectados.setVisible(true);
+    }
+    
+    void setServidoresConectados(ServidoresConectados ax) {
+        this.servidoresConectados = ax;
     }
     
     /**
@@ -408,4 +417,7 @@ public class AddServers extends javax.swing.JFrame {
     // End of variables declaration
     private boolean guardar;
     private Servidor server;
+    ServidoresConectados servidoresConectados;
+
+    
 }

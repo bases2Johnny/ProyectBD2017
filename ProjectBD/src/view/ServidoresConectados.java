@@ -49,7 +49,7 @@ public class ServidoresConectados extends JFrame {
         
     }
 
-    private void insertValues() {
+    public void insertValues() {
         CNS cns = this.control.getCNS();
         cns.getRows().stream().forEach(cn -> {
             this.bodyPanel.add(cn.getNombre());
@@ -81,6 +81,7 @@ public class ServidoresConectados extends JFrame {
     
     public void editar(String nombre){
         this.ventanaAddServers = new AddServers(new AddServerController(new AddServerModel()),false);
+        this.ventanaAddServers.setServidoresConectados(this);
         ArrayList<String> lista = this.ventanaAddServers.control.getValues(nombre);
         this.ventanaAddServers.setNameConexionText(lista.get(0));
         this.ventanaAddServers.setDBNameText(lista.get(1));
@@ -302,6 +303,7 @@ public class ServidoresConectados extends JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         this.ventanaAddServers = new AddServers(new AddServerController(new AddServerModel()),true);
+        this.ventanaAddServers.setServidoresConectados(this);
         this.ventanaAddServers.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -363,5 +365,6 @@ public class ServidoresConectados extends JFrame {
     private String name;
     Estategias ventana;
     AddServers ventanaAddServers;
+
 
 }
