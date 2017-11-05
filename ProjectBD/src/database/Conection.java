@@ -35,6 +35,6 @@ public class Conection {
     private Connection cn;
     private final String user = "servidor";
     private final String password = "servidor";
-    private final String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:XE";
+    private final String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:ORCL";
     private OracleDataSource ds;
 }

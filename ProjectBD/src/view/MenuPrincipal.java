@@ -142,7 +142,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         = new MenuPrincipalController(
                                 new ServidoresConectados(new ControllerServCon(new ModelServCon())),
                                  new Estategias(),
-                                 new AddServers(new AddServerController(new AddServerModel())));
+                                 new AddServers(new AddServerController(new AddServerModel()),true));
                 new MenuPrincipal(c).setVisible(true);
             }
         });

@@ -7,16 +7,20 @@ package view;
 
 import controller.AddServerController;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import model.Servidor;
 import model.models.AddServerModel;
 
 public class AddServers extends javax.swing.JFrame {
 
-    private final AddServerController control;
+    public final AddServerController control;
 
-    public AddServers(AddServerController control) {
+    public AddServers(AddServerController control, boolean guardar) {
+        this.guardar = guardar;
         initComponents();
         events();
         this.setResizable(false);
@@ -37,7 +41,13 @@ public class AddServers extends javax.swing.JFrame {
             String user = this.usernameText.getText();
             String pass = String.valueOf(this.passwordText.getPassword());
             server = new Servidor(nombreCon, nombreDB, IP, PORT, user, pass);
-            ArrayList<Object> msm = this.control.addServer(server);
+
+            ArrayList<Object> msm;
+            if(this.guardar)
+                msm = this.control.addServer(server);
+            else
+                msm = this.control.editServer(server);
+
             if ((Boolean) msm.get(0)) {
                 JOptionPane.showMessageDialog(null, msm.get(1));
             } else {
@@ -55,7 +65,11 @@ public class AddServers extends javax.swing.JFrame {
                 && !this.portText.getText().isEmpty()
                 && !this.DBNameText.getText().isEmpty();
     }
-
+        
+    public void regresar(){
+        this.setVisible(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,6 +237,14 @@ public class AddServers extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        
+        btnCancelarRegisterSer.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                    regresar();
+                }
+            });
+        
         body.add(btnCancelarRegisterSer, gridBagConstraints);
 
         usuario.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -309,7 +331,7 @@ public class AddServers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddServers(new AddServerController(new AddServerModel())).setVisible(true);
+                new AddServers(new AddServerController(new AddServerModel()),true).setVisible(true);
             }
         });
     }
@@ -323,6 +345,54 @@ public class AddServers extends javax.swing.JFrame {
     private javax.swing.JButton btnEstrategia;
     private javax.swing.JPanel header;
     private javax.swing.JLabel ip;
+
+    public JTextField getDBNameText() {
+        return DBNameText;
+    }
+
+    public void setDBNameText(String DBNameText) {
+        this.DBNameText.setText(DBNameText);
+    }
+
+    public JTextField getIpText() {
+        return ipText;
+    }
+
+    public void setIpText(String ipText) {
+        this.ipText.setText(ipText); 
+    }
+
+    public JTextField getNameConexionText() {
+        return nameConexionText;
+    }
+
+    public void setNameConexionText(String nameConexionText) {
+        this.nameConexionText.setText(nameConexionText);
+    }
+
+    public JPasswordField getPasswordText() {
+        return passwordText;
+    }
+
+    public void setPasswordText(String passwordText) {
+        this.passwordText.setText(passwordText);
+    }
+
+    public JTextField getPortText() {
+        return portText;
+    }
+
+    public void setPortText(String portText) {
+        this.portText.setText(portText);
+    }
+
+    public JTextField getUsernameText() {
+        return usernameText;
+    }
+
+    public void setUsernameText(String usernameText) {
+        this.usernameText.setText(usernameText);
+    }
     private javax.swing.JTextField ipText;
     private javax.swing.JLabel nameConexion;
     private javax.swing.JTextField nameConexionText;
@@ -335,6 +405,7 @@ public class AddServers extends javax.swing.JFrame {
     private javax.swing.JTextField usernameText;
     private javax.swing.JLabel usuario;
     // End of variables declaration                   
-    // End of variables declaration    
+    // End of variables declaration
+    private boolean guardar;
     private Servidor server;
 }
