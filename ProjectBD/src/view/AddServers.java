@@ -106,7 +106,6 @@ public class AddServers extends javax.swing.JFrame {
         ipText = new javax.swing.JTextField();
         port = new javax.swing.JLabel();
         portText = new javax.swing.JTextField();
-        btnEstrategia = new javax.swing.JButton();
         btnAceptarRegisterSer = new javax.swing.JButton();
         btnCancelarRegisterSer = new javax.swing.JButton();
         usuario = new javax.swing.JLabel();
@@ -221,14 +220,14 @@ public class AddServers extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         body.add(portText, gridBagConstraints);
 
-        btnEstrategia.setText("Estrategia");
+        
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        body.add(btnEstrategia, gridBagConstraints);
+        
 
         btnAceptarRegisterSer.setText("Aceptar");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -351,7 +350,6 @@ public class AddServers extends javax.swing.JFrame {
     private javax.swing.JPanel body;
     private javax.swing.JButton btnAceptarRegisterSer;
     private javax.swing.JButton btnCancelarRegisterSer;
-    private javax.swing.JButton btnEstrategia;
     private javax.swing.JPanel header;
     private javax.swing.JLabel ip;
 

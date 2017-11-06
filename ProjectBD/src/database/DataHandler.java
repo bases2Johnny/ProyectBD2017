@@ -166,7 +166,7 @@ public class DataHandler {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "select * from estrategias";
+            query = "select * from estrategias @"+name;
             rset = stmt.executeQuery(query);
             while(rset.next()){
                 lista.add(
@@ -180,6 +180,7 @@ public class DataHandler {
             return null;
         }
     }
+    
     public void insertEstrategia(String sql, String name){
         String commit="commit";
          try {
