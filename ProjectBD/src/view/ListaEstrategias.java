@@ -6,12 +6,15 @@
 package view;
 
 import controller.ControllerLista;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Estrategia;
-import model.classes.ButtonColumn;
+import model.classes.RenderButton;
 
 /**
  *
@@ -24,10 +27,12 @@ public class ListaEstrategias extends javax.swing.JFrame {
      *
      * @param nameServer
      */
-    public ListaEstrategias(String nameServer) {
+    public ListaEstrategias(String nameServer, ServidoresConectados sc) {
         initComponents();
+
         this.cl = new ControllerLista();
         this.nameServer = nameServer;
+        this.sc = sc;
         init();
 
     }
@@ -48,29 +53,43 @@ public class ListaEstrategias extends javax.swing.JFrame {
             "Hora",
             "Estado",
             "Ejecutado",
-            "Estrategia",
-            "Ejecutar"
+            "Estrategia"
         };
         Object[][] data = {};
         ArrayList<Estrategia> list = cl.getEstrategias(this.nameServer);
-        System.out.println("Hola estoy aqui!!");
+        //System.out.println("Hola estoy aqui!!");
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        this.tableE.setModel(model);
-        ButtonColumn buttonColumn;
+        //this.tableE.setModel(model);
+        RenderButton buttonColumn;
+        int i = 1;
         for (Estrategia est : list) {
             Object[] array = est.toString().split("-");
-            //array[array.length - 1]= new JButton("Hola");
-            //System.out.println(est);
             if (!array[3].equals("0")) {
                 array[3] = "Activo";
                 array[4] = (array[4].equals("0") ? "No ejecutado" : "Ejecutado");
-                buttonColumn = new ButtonColumn(this.tableE, 6, est);
                 model.addRow(array);
+                this.tableE.setModel(model);
+                this.editarLaVara(new JButton("Ejecutar"), i, est);
+                i++;
             }
         }
+        this.tableE.setRowHeight(32);
         this.tableE.setModel(model);
         this.tableE.getColumnModel().getColumn(5).setPreferredWidth(400);
         this.tableE.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    }
+
+    GridBagConstraints gridBagConstraints = new GridBagConstraints();
+
+    public void editarLaVara(JButton btn, int row, Estrategia est) {
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = row;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        btn.addActionListener((ActionEvent ae) -> {
+            System.out.println(est);
+        });
+        jPanel1.add(btn, gridBagConstraints);
     }
 
     /**
@@ -87,11 +106,14 @@ public class ListaEstrategias extends javax.swing.JFrame {
         panelEstrategias = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableE = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(900, 900));
-        setMinimumSize(new java.awt.Dimension(900, 900));
-        setPreferredSize(new java.awt.Dimension(900, 900));
+        setMaximumSize(new java.awt.Dimension(822, 342));
+        setMinimumSize(new java.awt.Dimension(822, 342));
+        setPreferredSize(new java.awt.Dimension(822, 342));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         titleServidores.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
@@ -99,6 +121,7 @@ public class ListaEstrategias extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.1;
@@ -155,45 +178,53 @@ public class ListaEstrategias extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(panelEstrategias, gridBagConstraints);
 
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setText("Ejecutar");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(6, 6, 6, 6);
+        jPanel1.add(jLabel1, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        jButton1.setBackground(new java.awt.Color(51, 204, 0));
+        jButton1.setText("Atras");
+        jButton1.setActionCommand("");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(jButton1, gridBagConstraints);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+        this.sc.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaEstrategias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaEstrategias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaEstrategias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaEstrategias.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListaEstrategias("Hola").setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelEstrategias;
     private javax.swing.JTable tableE;
@@ -201,4 +232,5 @@ public class ListaEstrategias extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private String nameServer;
     private ControllerLista cl;
+    private ServidoresConectados sc;
 }

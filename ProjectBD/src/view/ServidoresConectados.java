@@ -36,6 +36,7 @@ public class ServidoresConectados extends JFrame {
         initComponentsMe();
         insertValues();
     }
+
     private void initComponentsMe() {
         GridLayout layout = new GridLayout(0, 5);
         this.bodyPanel.setLayout(layout);
@@ -46,12 +47,12 @@ public class ServidoresConectados extends JFrame {
         this.bodyPanel.add(this.seleccionarCNServ);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        sC=this;
+        sC = this;
     }
 
     public void insertValues() {
         CNS cns = this.control.getCNS();
-        
+
         cns.getRows().stream().forEach(cn -> {
             this.bodyPanel.add(cn.getNombre());
             this.bodyPanel.add(cn.getEstado());
@@ -67,7 +68,7 @@ public class ServidoresConectados extends JFrame {
             cn.getRadioButton().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    name=e.getActionCommand();
+                    name = e.getActionCommand();
                     System.out.println(e.getActionCommand());
                     btnCreate.setEnabled(true);
                 }
@@ -75,7 +76,7 @@ public class ServidoresConectados extends JFrame {
             cn.getInspeccionar().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    le=new ListaEstrategias(nombre);
+                    le = new ListaEstrategias(nombre, getThis());
                     le.setVisible(true);
                     sC.setVisible(false);
                     //le.setNameServer(cn.getNombre().getText());
@@ -85,13 +86,17 @@ public class ServidoresConectados extends JFrame {
             this.bodyPanel.add(cn.getRadioButton());
         });
     }
-    
-    public String getServerName(){
+
+    private ServidoresConectados getThis() {
+        return this;
+    }
+
+    public String getServerName() {
         return this.name;
     }
-    
-    public void editar(String nombre){
-        this.ventanaAddServers = new AddServers(new AddServerController(new AddServerModel()),false);
+
+    public void editar(String nombre) {
+        this.ventanaAddServers = new AddServers(new AddServerController(new AddServerModel()), false);
         this.ventanaAddServers.setServidoresConectados(this);
         ArrayList<String> lista = this.ventanaAddServers.control.getValues(nombre);
         this.ventanaAddServers.setNameConexionText(lista.get(0));
@@ -103,6 +108,7 @@ public class ServidoresConectados extends JFrame {
         this.ventanaAddServers.setVisible(true);
         this.setVisible(false);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -306,7 +312,7 @@ public class ServidoresConectados extends JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        this.ventanaAddServers = new AddServers(new AddServerController(new AddServerModel()),true);
+        this.ventanaAddServers = new AddServers(new AddServerController(new AddServerModel()), true);
         this.ventanaAddServers.setServidoresConectados(this);
         this.ventanaAddServers.setVisible(true);
         this.setVisible(false);
