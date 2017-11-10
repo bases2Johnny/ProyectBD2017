@@ -6,10 +6,12 @@
 package view;
 
 import controller.ControllerLista;
-import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import model.Estrategia;
+import model.classes.ButtonColumn;
 
 /**
  *
@@ -19,42 +21,57 @@ public class ListaEstrategias extends javax.swing.JFrame {
 
     /**
      * Creates new form ListaEstrategias
+     *
+     * @param nameServer
      */
-    public ListaEstrategias() {
+    public ListaEstrategias(String nameServer) {
         initComponents();
+        this.cl = new ControllerLista();
+        this.nameServer = nameServer;
         init();
+
     }
 
     public void setNameServer(String nameServer) {
         this.nameServer = nameServer;
     }
-    public void init(){
+
+    public void init() {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
-        GridLayout layout = new GridLayout(0, 5);
-        this.panelEstrategias.setLayout(layout);
-        this.panelEstrategias.add(new JLabel("Nombre"));
-        this.panelEstrategias.add(new JLabel("Nombre"));
-        this.panelEstrategias.add(new JLabel("Nombre"));
-        this.panelEstrategias.add(new JLabel("Nombre"));
-        this.panelEstrategias.add(new JLabel("Nombre"));
-        
+        this.createTab();
     }
-   public void createTab(){
-       String[] columnNames = {"Nombre",
-                        "Estrategia",
-                        "Dias",
-                        "Hora",
-                        "Estado",
-                        "Ejecutado"
-       };
-       Object[][] data = {};
-       ArrayList<Estrategia> list =cl.getEstrategias(this.nameServer); 
-       for(int i=0;i<list.size();i++){
-           Estrategia e = list.get(i); 
-           
-       }
-   }
+
+    public void createTab() {
+        String[] columnNames = {"Nombre",
+            "Dias",
+            "Hora",
+            "Estado",
+            "Ejecutado",
+            "Estrategia",
+            "Ejecutar"
+        };
+        Object[][] data = {};
+        ArrayList<Estrategia> list = cl.getEstrategias(this.nameServer);
+        System.out.println("Hola estoy aqui!!");
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        this.tableE.setModel(model);
+        ButtonColumn buttonColumn;
+        for (Estrategia est : list) {
+            Object[] array = est.toString().split("-");
+            //array[array.length - 1]= new JButton("Hola");
+            //System.out.println(est);
+            if (!array[3].equals("0")) {
+                array[3] = "Activo";
+                array[4] = (array[4].equals("0") ? "No ejecutado" : "Ejecutado");
+                buttonColumn = new ButtonColumn(this.tableE, 6, est);
+                model.addRow(array);
+            }
+        }
+        this.tableE.setModel(model);
+        this.tableE.getColumnModel().getColumn(5).setPreferredWidth(400);
+        this.tableE.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -72,9 +89,23 @@ public class ListaEstrategias extends javax.swing.JFrame {
         tableE = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(900, 900));
+        setMinimumSize(new java.awt.Dimension(900, 900));
+        setPreferredSize(new java.awt.Dimension(900, 900));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         titleServidores.setFont(new java.awt.Font("Comic Sans MS", 1, 36)); // NOI18N
         titleServidores.setText("Estrategias ");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(titleServidores, gridBagConstraints);
+
+        panelEstrategias.setLayout(new java.awt.GridBagLayout());
 
         tableE.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,45 +135,25 @@ public class ListaEstrategias extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tableE);
 
-        javax.swing.GroupLayout panelEstrategiasLayout = new javax.swing.GroupLayout(panelEstrategias);
-        panelEstrategias.setLayout(panelEstrategiasLayout);
-        panelEstrategiasLayout.setHorizontalGroup(
-            panelEstrategiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEstrategiasLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
-        );
-        panelEstrategiasLayout.setVerticalGroup(
-            panelEstrategiasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelEstrategiasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.1;
+        panelEstrategias.add(jScrollPane1, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(panelEstrategias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(titleServidores))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titleServidores)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panelEstrategias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(panelEstrategias, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -177,7 +188,7 @@ public class ListaEstrategias extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListaEstrategias().setVisible(true);
+                new ListaEstrategias("Hola").setVisible(true);
             }
         });
     }

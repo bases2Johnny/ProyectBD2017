@@ -51,10 +51,12 @@ public class ServidoresConectados extends JFrame {
 
     public void insertValues() {
         CNS cns = this.control.getCNS();
+        
         cns.getRows().stream().forEach(cn -> {
             this.bodyPanel.add(cn.getNombre());
             this.bodyPanel.add(cn.getEstado());
             this.bodyPanel.add(cn.getInspeccionar());
+            String nombre = cn.getNombre().getText();
             cn.getEditar().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
@@ -73,11 +75,10 @@ public class ServidoresConectados extends JFrame {
             cn.getInspeccionar().addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    le=new ListaEstrategias();
+                    le=new ListaEstrategias(nombre);
                     le.setVisible(true);
                     sC.setVisible(false);
-                    le.setNameServer(name);
-
+                    //le.setNameServer(cn.getNombre().getText());
                 }
             });
             this.RadioButtonConectar.add(cn.getRadioButton());
@@ -247,10 +248,13 @@ public class ServidoresConectados extends JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(jScrollPane1, gridBagConstraints);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         btnCreate.setText("Crear Estrategia");
         btnCreate.setEnabled(false);
@@ -259,31 +263,20 @@ public class ServidoresConectados extends JFrame {
                 btnCreateActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 111, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(btnCreate)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 23, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(btnCreate)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 8;
+        gridBagConstraints.gridheight = 9;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 41, 0, 41);
+        jPanel1.add(btnCreate, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(jPanel1, gridBagConstraints);
 
         btnAgregar.setText("Agregar Servidor");
@@ -295,6 +288,7 @@ public class ServidoresConectados extends JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(btnAgregar, gridBagConstraints);
 
         pack();

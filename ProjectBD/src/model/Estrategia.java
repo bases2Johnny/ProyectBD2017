@@ -1,4 +1,3 @@
-
 package model;
 
 public class Estrategia {
@@ -62,9 +61,9 @@ public class Estrategia {
 
     @Override
     public String toString() {
-        return "Estrategia{" + "name=" + name + ", dias=" + dias + ", hora=" + hora + ", estrategia=" + estrategia + ", estado=" + estado + ", ejecutado=" + ejecutado + '}';
+        return name + "-" + dias + "-" + hora + "-" + estado + "-" + ejecutado+  "-" + estrategia ;
     }
-    
+
     private String name;
     private String dias;
     private String hora;
