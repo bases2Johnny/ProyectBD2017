@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Estrategia;
+import model.classes.RemoteBat;
 import model.classes.RenderButton;
 
 /**
@@ -87,7 +88,9 @@ public class ListaEstrategias extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         btn.addActionListener((ActionEvent ae) -> {
-            System.out.println(est);
+//            System.out.println(est.getEstrategia());
+            RemoteBat rb = new RemoteBat("192.168.2.2", est.getEstrategia());
+            rb.startSender();
         });
         jPanel1.add(btn, gridBagConstraints);
     }
