@@ -18,7 +18,7 @@ public class RowCNS {
 
     public RowCNS(String nombreText) {
         this.nombreText = nombreText;
-        this.estadoText = "Bueno";
+        this.estadoText = "Correcto";
         this.info = null;
 
         /*---- Create Components ------*/
