@@ -23,6 +23,10 @@ public class ModelServCon {
     public ArrayList<RowCNS>  getCNS(){
         return this.dbH.getCNS();
     }
+
+    public DataHandler getDbH() {
+        return dbH;
+    }
    
     private CNS cns;
     private DataHandler dbH;

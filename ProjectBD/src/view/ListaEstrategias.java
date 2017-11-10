@@ -195,7 +195,6 @@ public class ListaEstrategias extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        jButton1.setBackground(new java.awt.Color(51, 204, 0));
         jButton1.setText("Atras");
         jButton1.setActionCommand("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

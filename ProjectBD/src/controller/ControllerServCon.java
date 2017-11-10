@@ -20,4 +20,8 @@ public class ControllerServCon {
     
 
     private ModelServCon modelo;
+
+    public ModelServCon getModelo() {
+        return modelo;
+    }
 }

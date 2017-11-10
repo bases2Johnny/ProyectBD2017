@@ -148,15 +148,15 @@ public class DataHandler {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "select count(name) from estrategias"+name;
+            query = "select count(name) from estrategias @"+name;
             rset = stmt.executeQuery(query);
             rset.next();
             cantidad=rset.getInt(1);
-            System.out.println(cantidad);
+            //System.out.println(cantidad);
             cn.disconnect();
             return cantidad;
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            //System.err.println(e.getMessage());
             return 0;
         }
     }
@@ -178,6 +178,21 @@ public class DataHandler {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
             return null;
+        }
+    }
+    
+    public Boolean testCon(String name){
+        try {
+            Connection conn = cn.connect();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            query = "select * from dual@"+name;
+            rset = stmt.executeQuery(query);
+            cn.disconnect();
+            return true;
+        } catch (SQLException e) {
+            //System.err.println(e.getMessage());
+            return false;
         }
     }
     

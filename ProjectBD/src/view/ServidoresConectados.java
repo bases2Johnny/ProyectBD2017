@@ -52,8 +52,15 @@ public class ServidoresConectados extends JFrame {
 
     public void insertValues() {
         CNS cns = this.control.getCNS();
-
         cns.getRows().stream().forEach(cn -> {
+            if (!this.control.getModelo().getDbH().testCon(cn.getNombre().getText())) {
+                cn.getInspeccionar().setEnabled(false);
+                cn.getRadioButton().setEnabled(false);
+                cn.getEditar().setEnabled(false);
+                cn.getEstado().setText("Desconectado");
+            } else {
+                cn.getEstado().setText("Conectado");
+            }
             this.bodyPanel.add(cn.getNombre());
             this.bodyPanel.add(cn.getEstado());
             this.bodyPanel.add(cn.getInspeccionar());
