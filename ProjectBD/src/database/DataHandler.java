@@ -30,8 +30,7 @@ public class DataHandler {
             return null;
         }
     }
-    
-    
+
     public ArrayList<String> getTablespaces(String name) {
         ArrayList<String> lista = new ArrayList();
         try {
@@ -40,8 +39,8 @@ public class DataHandler {
                     ResultSet.CONCUR_READ_ONLY);
             query = "select tablespace_name from dba_tablespaces" + name;
             rset = stmt.executeQuery(query);
-            while(rset.next()){
-                
+            while (rset.next()) {
+
                 lista.add(rset.getString("TABLESPACE_NAME"));
             }
             cn.disconnect();
@@ -52,7 +51,6 @@ public class DataHandler {
         }
     }
 
-
     public ArrayList<RowCNS> getCNS() {
         ArrayList<RowCNS> lista = new ArrayList();
 
@@ -62,7 +60,7 @@ public class DataHandler {
                     ResultSet.CONCUR_READ_ONLY);
             query = "select nombreconexion from databaselinkserver";
             rset = stmt.executeQuery(query);
-            while(rset.next()){
+            while (rset.next()) {
                 RowCNS rowcns = new RowCNS(rset.getString("nombreconexion"));
                 lista.add(rowcns);
             }
@@ -73,26 +71,26 @@ public class DataHandler {
             return null;
         }
     }
-    
-    public ArrayList<Object> AddServer(Servidor server){
+
+    public ArrayList<Object> AddServer(Servidor server) {
         ArrayList<Object> lista = new ArrayList<>();
         try {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "create public database link "+ server.getNombre() +"\n" +
-            "connect to "+ server.getUser() +" identified by "+ server.getPass() +"\n" +
-            "using '(DESCRIPTION =\n" +
-            "    (ADDRESS = (PROTOCOL = TCP)(HOST = "+ server.getIp() +")(PORT = "+ server.getPuerto() +"))\n" +
-            "    (CONNECT_DATA =\n" +
-            "      (SERVER = DEDICATED)\n" +
-            "      (SERVICE_NAME = "+ server.getDB() +")\n" +
-            "    )\n" +
-            "  )'";
+            query = "create public database link " + server.getNombre() + "\n"
+                    + "connect to " + server.getUser() + " identified by " + server.getPass() + "\n"
+                    + "using '(DESCRIPTION =\n"
+                    + "    (ADDRESS = (PROTOCOL = TCP)(HOST = " + server.getIp() + ")(PORT = " + server.getPuerto() + "))\n"
+                    + "    (CONNECT_DATA =\n"
+                    + "      (SERVER = DEDICATED)\n"
+                    + "      (SERVICE_NAME = " + server.getDB() + ")\n"
+                    + "    )\n"
+                    + "  )'";
             rset = stmt.executeQuery(query);
             lista.add(true);
             lista.add("se creo exitosamente la coneccion");
-            query = "insert into databaselinkserver values('"+server.getNombre().toUpperCase()+"','"+server.getDB()+"','"+ server.getIp()+"','"+server.getPuerto()+"','"+server.getUser()+"','"+server.getPass()+"')";
+            query = "insert into databaselinkserver values('" + server.getNombre().toUpperCase() + "','" + server.getDB() + "','" + server.getIp() + "','" + server.getPuerto() + "','" + server.getUser() + "','" + server.getPass() + "')";
             stmt.executeQuery(query);
             cn.disconnect();
             return lista;
@@ -110,23 +108,23 @@ public class DataHandler {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "drop public database link "+ server.getNombre();
+            query = "drop public database link " + server.getNombre();
             stmt.executeQuery(query);
-            
-            query = "create public database link "+ server.getNombre() +"\n" +
-            "connect to "+ server.getUser() +" identified by "+ server.getPass() +"\n" +
-            "using '(DESCRIPTION =\n" +
-            "    (ADDRESS = (PROTOCOL = TCP)(HOST = "+ server.getIp() +")(PORT = "+ server.getPuerto() +"))\n" +
-            "    (CONNECT_DATA =\n" +
-            "      (SERVER = DEDICATED)\n" +
-            "      (SERVICE_NAME = "+ server.getDB() +")\n" +
-            "    )\n" +
-            "  )'";
+
+            query = "create public database link " + server.getNombre() + "\n"
+                    + "connect to " + server.getUser() + " identified by " + server.getPass() + "\n"
+                    + "using '(DESCRIPTION =\n"
+                    + "    (ADDRESS = (PROTOCOL = TCP)(HOST = " + server.getIp() + ")(PORT = " + server.getPuerto() + "))\n"
+                    + "    (CONNECT_DATA =\n"
+                    + "      (SERVER = DEDICATED)\n"
+                    + "      (SERVICE_NAME = " + server.getDB() + ")\n"
+                    + "    )\n"
+                    + "  )'";
             stmt.executeQuery(query);
-            
+
             lista.add(true);
             lista.add("se edito exitosamente la conexion");
-            query = "update databaselinkserver set nombredb = '"+ server.getDB() +"', ip ='" + server.getIp()+"', puerto = '" + server.getPuerto() + "', username = '"+ server.getUser()+ "', pass = '"+ server.getPass()+ "' where nombreconexion = '" + server.getNombre() +"'";
+            query = "update databaselinkserver set nombredb = '" + server.getDB() + "', ip ='" + server.getIp() + "', puerto = '" + server.getPuerto() + "', username = '" + server.getUser() + "', pass = '" + server.getPass() + "' where nombreconexion = '" + server.getNombre() + "'";
             stmt.executeQuery(query);
             cn.disconnect();
             return lista;
@@ -136,42 +134,40 @@ public class DataHandler {
             lista.add(e.getLocalizedMessage());
             return lista;
         }
- 
+
     }
-    
 
     public int getEstrategias(String name) {
 
-        int cantidad=0;
+        int cantidad = 0;
 
         try {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "select count(name) from estrategias @"+name;
+            query = "select count(name) from estrategias @" + name;
             rset = stmt.executeQuery(query);
             rset.next();
-            cantidad=rset.getInt(1);
-            //System.out.println(cantidad);
+            cantidad = rset.getInt(1);
             cn.disconnect();
             return cantidad;
         } catch (SQLException e) {
-            //System.err.println(e.getMessage());
             return 0;
         }
     }
+
     public ArrayList<Estrategia> getEstrategias1(String name) {
-        ArrayList<Estrategia> lista=new ArrayList<>();
+        ArrayList<Estrategia> lista = new ArrayList<>();
         try {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "select * from estrategias @"+name;
+            query = "select * from estrategias @" + name;
             rset = stmt.executeQuery(query);
-            while(rset.next()){
+            while (rset.next()) {
                 lista.add(
-                        new Estrategia(rset.getString(1),rset.getString(2),
-                                rset.getString(3),rset.getString(4),rset.getString(5),rset.getString(6)));
+                        new Estrategia(rset.getString(1), rset.getString(2),
+                                rset.getString(3), rset.getString(4), rset.getString(5), rset.getString(6)));
             }
             cn.disconnect();
             return lista;
@@ -180,29 +176,27 @@ public class DataHandler {
             return null;
         }
     }
-    
-    public Boolean testCon(String name){
+
+    public Boolean testCon(String name) {
         try {
             Connection conn = cn.connect();
             stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
                     ResultSet.CONCUR_READ_ONLY);
-            query = "select * from dual@"+name;
+            query = "select * from dual@" + name;
             rset = stmt.executeQuery(query);
             cn.disconnect();
             return true;
         } catch (SQLException e) {
-            //System.err.println(e.getMessage());
             return false;
         }
     }
-    
-    public void insertEstrategia(String sql, String name){
-        String commit="commit";
-         try {
+
+    public void insertEstrategia(String sql, String name) {
+        String commit = "commit";
+        try {
             Connection conn = cn.connect();
             stmt = conn.createStatement();
-            query = "insert into estrategias "+name+" values("+sql+")";
-            System.out.println(query);
+            query = "insert into estrategias " + name + " values(" + sql + ")";
             rset = stmt.executeQuery(query);
             stmt.executeQuery(commit);
             cn.disconnect();
@@ -210,15 +204,31 @@ public class DataHandler {
             System.err.println(e.getMessage());
         }
     }
-    
+
+    public Boolean EstrategiaEjecutada(String est, String name) {
+        String commit = "commit";
+        try {
+            Connection conn = cn.connect();
+            stmt = conn.createStatement();
+            query = "update estrategias@" + name + " set ejecutado = '1' where estrategia = '" + est + "'";
+            rset = stmt.executeQuery(query);
+            stmt.executeQuery(commit);
+            cn.disconnect();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+
     public ArrayList<String> getDatabaseLinkValues(String nombre) {
         try {
             ArrayList<String> lista = new ArrayList<>();
             Connection conn = cn.connect();
             stmt = conn.createStatement();
-            query = "select * from databaselinkserver where nombreconexion = '" + nombre +"'";
+            query = "select * from databaselinkserver where nombreconexion = '" + nombre + "'";
             rset = stmt.executeQuery(query);
-            while(rset.next()){
+            while (rset.next()) {
                 lista.add(rset.getString("NOMBRECONEXION"));
                 lista.add(rset.getString("NOMBREDB"));
                 lista.add(rset.getString("IP"));
@@ -233,13 +243,27 @@ public class DataHandler {
             return null;
         }
     }
-    
+
+    public String getIp(String name) {
+        try {
+            Connection conn = cn.connect();
+            stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            query = "select ip from databaselinkserver where nombreconexion = '" + name + "'";
+            rset = stmt.executeQuery(query);
+            rset.next();
+            String aux = rset.getString(1);
+            cn.disconnect();
+            return aux;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
     Statement stmt;
     ResultSet rset;
     String query;
     String sqlString;
     private final Conection cn;
 
-
-    
 }

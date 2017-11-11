@@ -6,10 +6,12 @@
 package view;
 
 import controller.ControllerLista;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +23,7 @@ import model.classes.RenderButton;
  *
  * @author casca
  */
-public class ListaEstrategias extends javax.swing.JFrame {
+public class ListaEstrategias extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form ListaEstrategias
@@ -34,6 +36,7 @@ public class ListaEstrategias extends javax.swing.JFrame {
         this.cl = new ControllerLista();
         this.nameServer = nameServer;
         this.sc = sc;
+        this.ip = cl.getIp(nameServer);
         init();
 
     }
@@ -45,6 +48,7 @@ public class ListaEstrategias extends javax.swing.JFrame {
     public void init() {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        this.cl.registrarObservador(this);
         this.createTab();
     }
 
@@ -57,6 +61,7 @@ public class ListaEstrategias extends javax.swing.JFrame {
             "Estrategia"
         };
         Object[][] data = {};
+        System.out.println(this.nameServer);
         ArrayList<Estrategia> list = cl.getEstrategias(this.nameServer);
         //System.out.println("Hola estoy aqui!!");
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
@@ -89,9 +94,14 @@ public class ListaEstrategias extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         btn.addActionListener((ActionEvent ae) -> {
 //            System.out.println(est.getEstrategia());
-            RemoteBat rb = new RemoteBat("192.168.2.2", est.getEstrategia());
+            RemoteBat rb = new RemoteBat(this.ip, est.getEstrategia());
             rb.startSender();
+            if(cl.EstrategiaEjecutada(est.getEstrategia(), this.nameServer)){
+                this.createTab();
+                update(this.cl.getModel(),this.tableE);
+            }
         });
+        
         jPanel1.add(btn, gridBagConstraints);
     }
 
@@ -219,6 +229,8 @@ public class ListaEstrategias extends javax.swing.JFrame {
         this.sc.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -233,6 +245,12 @@ public class ListaEstrategias extends javax.swing.JFrame {
     private javax.swing.JLabel titleServidores;
     // End of variables declaration//GEN-END:variables
     private String nameServer;
+    private String ip;
     private ControllerLista cl;
     private ServidoresConectados sc;
+
+    @Override
+    public void update(Observable o, Object o1) {
+         getContentPane().repaint();
+    }
 }

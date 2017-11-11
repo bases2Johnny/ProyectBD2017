@@ -48,21 +48,18 @@ public class RemoteBat{
             @Override
             public void run() {
                 try {
+                    System.out.println(ip);
                     Socket s = new Socket(ip, 5000);
                     BufferedWriter out = new BufferedWriter(
                             new OutputStreamWriter(s.getOutputStream()));
 
                     while (true) {
-//                        String entradaTeclado = "";
-//                        Scanner entradaEscaner = new Scanner (System.in); //Creación de un objeto Scanner
-//                        entradaTeclado = entradaEscaner.nextLine ();
                         out.write(est);
                         out.newLine();
                         out.flush();
-                        break;
-//                        Thread.sleep(200);
+                        
+                        break;                        
                     }
-
                 } catch (UnknownHostException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

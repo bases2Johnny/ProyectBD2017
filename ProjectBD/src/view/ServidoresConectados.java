@@ -7,11 +7,15 @@ package view;
 
 import controller.AddServerController;
 import controller.ControllerServCon;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import model.CNS;
 import model.models.AddServerModel;
 import model.models.ModelServCon;
@@ -20,7 +24,7 @@ import model.models.ModelServCon;
  *
  * @author casca
  */
-public class ServidoresConectados extends JFrame {
+public class ServidoresConectados extends JFrame implements Observer {
 
     /**
      * Creates new form ServidoresConectados
@@ -34,6 +38,7 @@ public class ServidoresConectados extends JFrame {
         this.control = control;
         initComponents();
         initComponentsMe();
+        this.control.regitraObserver(this);
         insertValues();
     }
 
@@ -94,6 +99,11 @@ public class ServidoresConectados extends JFrame {
         });
     }
 
+    public ControllerServCon getControl() {
+        return control;
+    }
+    
+
     private ServidoresConectados getThis() {
         return this;
     }
@@ -131,7 +141,6 @@ public class ServidoresConectados extends JFrame {
         titleServidores = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         body = new javax.swing.JPanel();
-        palenContainTable = new javax.swing.JPanel();
         headerNames = new javax.swing.JPanel();
         nombreCNServ = new javax.swing.JLabel();
         estadoCNServ = new javax.swing.JLabel();
@@ -168,8 +177,6 @@ public class ServidoresConectados extends JFrame {
         getContentPane().add(head, gridBagConstraints);
 
         body.setLayout(new java.awt.GridBagLayout());
-
-        palenContainTable.setLayout(new java.awt.GridBagLayout());
 
         headerNames.setLayout(new java.awt.GridBagLayout());
 
@@ -232,17 +239,17 @@ public class ServidoresConectados extends JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weightx = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        palenContainTable.add(headerNames, gridBagConstraints);
+        body.add(headerNames, gridBagConstraints);
 
         javax.swing.GroupLayout bodyPanelLayout = new javax.swing.GroupLayout(bodyPanel);
         bodyPanel.setLayout(bodyPanelLayout);
         bodyPanelLayout.setHorizontalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 612, Short.MAX_VALUE)
         );
         bodyPanelLayout.setVerticalGroup(
             bodyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 239, Short.MAX_VALUE)
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -252,9 +259,7 @@ public class ServidoresConectados extends JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weighty = 0.1;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        palenContainTable.add(bodyPanel, gridBagConstraints);
-
-        body.add(palenContainTable, new java.awt.GridBagConstraints());
+        body.add(bodyPanel, gridBagConstraints);
 
         jScrollPane1.setViewportView(body);
 
@@ -317,12 +322,18 @@ public class ServidoresConectados extends JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCreateActionPerformed
 
+    
+    
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         this.ventanaAddServers = new AddServers(new AddServerController(new AddServerModel()), true);
         this.ventanaAddServers.setServidoresConectados(this);
         this.ventanaAddServers.setVisible(true);
         this.setVisible(false);
+//        if (this.isVisible()) {
+//            this.insertValues();
+//            update(this.control.getModelo(), this.body);
+//        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     /**
@@ -375,7 +386,6 @@ public class ServidoresConectados extends JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nombreCNServ;
-    private javax.swing.JPanel palenContainTable;
     private javax.swing.JLabel seleccionarCNServ;
     private javax.swing.JLabel titleServidores;
     // End of variables declaration//GEN-END:variables
@@ -384,5 +394,18 @@ public class ServidoresConectados extends JFrame {
     AddServers ventanaAddServers;
     ListaEstrategias le;
     ServidoresConectados sC;
+
+    public JPanel getBody() {
+        return body;
+    }
+
+    public JPanel getBodyPanel() {
+        return bodyPanel;
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        this.body.repaint();
+    }
 
 }

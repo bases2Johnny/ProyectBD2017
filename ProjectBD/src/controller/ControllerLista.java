@@ -7,6 +7,7 @@ package controller;
 
 import model.Estrategia;
 import java.util.ArrayList;
+import java.util.Observer;
 import model.ModelLista;
 
 /**
@@ -16,11 +17,31 @@ import model.ModelLista;
 public class ControllerLista {
 
     public ControllerLista() {
-        this.model= new ModelLista();
+        this.model = new ModelLista();
     }
-    
-    public ArrayList<Estrategia> getEstrategias(String name){
+
+    public ArrayList<Estrategia> getEstrategias(String name) {
         return model.getEstrategias(name);
     }
-    private ModelLista model; 
+
+    public Boolean EstrategiaEjecutada(String est, String name) {
+        return model.EstrategiaEjecutada(est, name);
+    }
+
+    public ModelLista getModel() {
+        return model;
+    }
+    
+    
+
+    public String getIp(String name) {
+        return model.getIp(name);
+    }
+
+    private ModelLista model;
+
+    public void registrarObservador(Observer obs) {
+        model.addObserver(obs);
+    }
+
 }

@@ -43,16 +43,18 @@ public class AddServers extends javax.swing.JFrame {
             server = new Servidor(nombreCon, nombreDB, IP, PORT, user, pass);
 
             ArrayList<Object> msm;
-            if(this.guardar)
+            if (this.guardar) {
                 msm = this.control.addServer(server);
-            else
+            } else {
                 msm = this.control.editServer(server);
+            }
 
             if ((Boolean) msm.get(0)) {
                 int val = JOptionPane.showOptionDialog(null, msm.get(1), "", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null, null, null);
-                if(val == 0)
+                        JOptionPane.INFORMATION_MESSAGE, null, null, null);
+                if (val == 0) {
                     this.regresar();
+                }
             } else {
                 JOptionPane.showMessageDialog(null, msm.get(1), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -68,17 +70,20 @@ public class AddServers extends javax.swing.JFrame {
                 && !this.portText.getText().isEmpty()
                 && !this.DBNameText.getText().isEmpty();
     }
-        
-    public void regresar(){
+
+    public void regresar() {
         this.setVisible(false);
 //        this.servidoresConectados.insertValues();
         this.servidoresConectados.setVisible(true);
+        this.servidoresConectados.insertValues();
+        this.servidoresConectados.update(this.servidoresConectados.getControl().getModelo(),
+                 this.servidoresConectados.getBodyPanel());
     }
-    
+
     void setServidoresConectados(ServidoresConectados ax) {
         this.servidoresConectados = ax;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -220,14 +225,12 @@ public class AddServers extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         body.add(portText, gridBagConstraints);
 
-        
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        
 
         btnAceptarRegisterSer.setText("Aceptar");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -245,14 +248,14 @@ public class AddServers extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
         gridBagConstraints.weighty = 0.2;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
-        
+
         btnCancelarRegisterSer.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent ae) {
-                    regresar();
-                }
-            });
-        
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                regresar();
+            }
+        });
+
         body.add(btnCancelarRegisterSer, gridBagConstraints);
 
         usuario.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
@@ -339,7 +342,7 @@ public class AddServers extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddServers(new AddServerController(new AddServerModel()),true).setVisible(true);
+                new AddServers(new AddServerController(new AddServerModel()), true).setVisible(true);
             }
         });
     }
@@ -366,7 +369,7 @@ public class AddServers extends javax.swing.JFrame {
     }
 
     public void setIpText(String ipText) {
-        this.ipText.setText(ipText); 
+        this.ipText.setText(ipText);
     }
 
     public JTextField getNameConexionText() {
@@ -417,5 +420,4 @@ public class AddServers extends javax.swing.JFrame {
     private Servidor server;
     ServidoresConectados servidoresConectados;
 
-    
 }
